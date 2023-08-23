@@ -9,8 +9,10 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    let sections: [SettingsKeys] = [.copyScope, .includeHyphen, .leaveHistory]
+    
     private let tableView: UITableView = {
-        let tv = UITableView()
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tv
     }()
@@ -46,5 +48,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 30
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
 }

@@ -1,9 +1,20 @@
 import Foundation
 
-enum SettingsKeys: String {
-    case copyScope
-    case includeHyphen
-    case leaveHistory
+enum SettingsKeys {
+    case copyScope(values: [CopyScope])
+    case includeHyphen(values: [IncludeHyphen])
+    case leaveHistory(values: [LeaveHistory])
+    
+    var keyString: String {
+        switch self {
+        case .copyScope:
+            return "copyScope"
+        case .includeHyphen:
+            return "includeHyphen"
+        case .leaveHistory:
+            return "leaveHistory"
+        }
+    }
 }
 
 enum CopyScope: String {

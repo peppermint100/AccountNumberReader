@@ -20,9 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func registerDefaultUserDefaults() {
         UserDefaults.standard.register(defaults: [
-            SettingsKeys.copyScope.rawValue: CopyScope.includeBankName.rawValue,
-            SettingsKeys.includeHyphen.rawValue: IncludeHyphen.off.rawValue,
-            SettingsKeys.leaveHistory.rawValue: LeaveHistory.every.rawValue
+            SettingsKeys.copyScope.keyString: CopyScope.includeBankName.rawValue,
+            SettingsKeys.includeHyphen.keyString: IncludeHyphen.off.rawValue,
+            SettingsKeys.leaveHistory.keyString: LeaveHistory.every.rawValue
         ])
     }
 
