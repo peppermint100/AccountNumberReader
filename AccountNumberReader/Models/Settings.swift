@@ -1,29 +1,23 @@
 import Foundation
 
-enum SettingsKeys {
-    case copyScope(values: [CopyScope])
-    case includeHyphen(values: [IncludeHyphen])
-    case leaveHistory(values: [LeaveHistory])
-    
-    var keyString: String {
-        switch self {
-        case .copyScope:
-            return "copyScope"
-        case .includeHyphen:
-            return "includeHyphen"
-        case .leaveHistory:
-            return "leaveHistory"
-        }
-    }
+struct AppSetting {
+    var settingKey: SettingKey
+    var settingValues: [String]
+}
+
+enum SettingKey: String {
+    case copyScope
+    case includeHyphen
+    case leaveHistory
 }
 
 enum CopyScope: String {
-    case onlyAccountNumber
+    case onlyAccountNumber // 0
     case includeBankName
     case includeName
 }
 
-enum IncludeHyphen: String{
+enum IncludeHyphen: String {
     case on
     case off
 }

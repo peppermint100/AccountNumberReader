@@ -9,19 +9,21 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    let sections: [SettingsKeys] = [.copyScope, .includeHyphen, .leaveHistory]
+    var sections: [AppSetting] = []
     
     private let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tv
     }()
-
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         configureTableView()
+        configureSections()
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,11 +35,28 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    private func configureSections() {
+        let copyScopeSetting = AppSetting.init(
+            settingKey: .copyScope,
+            settingValues: [CopyScope.onlyAccountNumber.rawValue, CopyScope.includeBankName.rawValue, CopyScope.includeName.rawValue])
+        let includeHyphenSetting = AppSetting.init(
+            settingKey: .includeHyphen,
+            settingValues: [IncludeHyphen.on.rawValue, IncludeHyphen.off.rawValue])
+        let leaveHistorySetting = AppSetting.init(
+            settingKey: .leaveHistory,
+            settingValues: [LeaveHistory.every.rawValue, LeaveHistory.ask.rawValue, LeaveHistory.never.rawValue])
+        
+        sections.append(copyScopeSetting)
+        sections.append(includeHyphenSetting)
+        sections.append(leaveHistorySetting)
+    }
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let setting = sections[section]
+        return setting.settingValues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
