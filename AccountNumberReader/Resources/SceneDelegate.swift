@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  AccountNumberReader
-//
-//  Created by peppermint100 on 2023/08/22.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -21,6 +14,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = MainTabBarViewController()
         window?.makeKeyAndVisible()
+        
+        registerDefaultUserDefaults()
+    }
+    
+    func registerDefaultUserDefaults() {
+        UserDefaults.standard.register(defaults: [
+            SettingsKeys.copyScope.rawValue: CopyScope.includeBankName.rawValue,
+            SettingsKeys.includeHyphen.rawValue: IncludeHyphen.off.rawValue,
+            SettingsKeys.leaveHistory.rawValue: LeaveHistory.every.rawValue
+        ])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
