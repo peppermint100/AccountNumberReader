@@ -16,6 +16,7 @@
 		BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9852A94AEF300D31A7A /* HistoryViewController.swift */; };
 		BA05E9882A94AEFA00D31A7A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
+		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BA05E9852A94AEF300D31A7A /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				BA05E9762A94ADDF00D31A7A /* LaunchScreen.storyboard */,
+				E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,

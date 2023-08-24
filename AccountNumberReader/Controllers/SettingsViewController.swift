@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     var sections: [AppSetting] = []
     
     private let tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
+        let tv = UITableView(frame: .zero, style: .insetGrouped)
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tv
     }()
@@ -34,6 +34,7 @@ class SettingsViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(SettingsHeaderView.self, forHeaderFooterViewReuseIdentifier: SettingsHeaderView.identifier)
     }
     
     private func configureSections() {
@@ -61,7 +62,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        cell.backgroundColor = .systemGray
         return cell
     }
     
@@ -71,5 +72,30 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: SettingsHeaderView.identifier) as? SettingsHeaderView
+        else {
+            return UITableViewHeaderFooterView()
+        }
+        
+        let setting = sections[section]
+        
+        switch setting.settingKey {
+        case .copyScope:
+            headerView.configure(with: SettingsHeaderViewViewModel(title: "계좌번호 복사 범위"))
+        case .includeHyphen:
+            headerView.configure(with: SettingsHeaderViewViewModel(title: "하이픈 포함"))
+        case .leaveHistory:
+            headerView.configure(with: SettingsHeaderViewViewModel(title: "스캔 내역"))
+        }
+        
+        return headerView;
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
 }
