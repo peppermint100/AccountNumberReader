@@ -13,7 +13,6 @@ class SettingsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .insetGrouped)
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tv
     }()
     
@@ -35,6 +34,7 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingsHeaderView.self, forHeaderFooterViewReuseIdentifier: SettingsHeaderView.identifier)
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
     }
     
     private func configureSections() {
@@ -54,6 +54,7 @@ class SettingsViewController: UIViewController {
     }
 }
 
+// MARK: - TableView 델리게이트
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let setting = sections[section]
@@ -61,8 +62,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemGray
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath)
+                as? SettingsTableViewCell
+        else {
+            return UITableViewCell()
+        }
+        cell.configure(with: SettingsTableViewCellViewModel(title: "옵션 제목", isChecked: true))
         return cell
     }
     
