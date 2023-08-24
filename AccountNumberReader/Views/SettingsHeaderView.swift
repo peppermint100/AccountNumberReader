@@ -7,10 +7,6 @@
 
 import UIKit
 
-struct SettingsHeaderViewViewModel {
-    var title: String
-}
-
 class SettingsHeaderView: UITableViewHeaderFooterView {
     
     static let identifier = "SettingsHeaderView"

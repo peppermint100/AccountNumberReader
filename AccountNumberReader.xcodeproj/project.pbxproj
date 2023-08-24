@@ -17,6 +17,7 @@
 		BA05E9882A94AEFA00D31A7A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
 		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
+		E5B3AF6C2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
+		E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		BA05E96A2A94ADDD00D31A7A /* AccountNumberReader */ = {
 			isa = PBXGroup;
 			children = (
+				E5B3AF6A2A9738B900A4E6E7 /* ViewModels */,
 				E58823D12A95DE6300143953 /* Models */,
 				BA05E9792A94ADDF00D31A7A /* Info.plist */,
 				BA05E9822A94AEAF00D31A7A /* Views */,
@@ -109,6 +112,14 @@
 				E58823D22A95DE7400143953 /* Settings.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E5B3AF6A2A9738B900A4E6E7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B3AF6C2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift in Sources */,
 				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
