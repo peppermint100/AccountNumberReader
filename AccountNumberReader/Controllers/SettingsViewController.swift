@@ -71,10 +71,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -100,7 +96,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return headerView;
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

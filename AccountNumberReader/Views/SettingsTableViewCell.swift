@@ -2,15 +2,9 @@
 //  SettingsTableViewCell.swift
 //  AccountNumberReader
 //
-//  Created by 이인규 on 2023/08/24.
 //
 
 import UIKit
-
-struct SettingsTableViewCellViewModel {
-    var title: String
-    var isChecked: Bool
-}
 
 class SettingsTableViewCell: UITableViewCell {
     
@@ -21,6 +15,7 @@ class SettingsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = .systemFont(ofSize: 13)
+        label.backgroundColor = .red
         return label
     }()
     
@@ -28,6 +23,7 @@ class SettingsTableViewCell: UITableViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.backgroundColor = .green
         return button
     }()
     
@@ -44,10 +40,10 @@ class SettingsTableViewCell: UITableViewCell {
     
     private func applyConstraint() {
         NSLayoutConstraint.activate([
-            optionTitleLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height),
-            optionTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            checkButton.heightAnchor.constraint(equalToConstant: contentView.frame.height),
-            checkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            optionTitleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            optionTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            optionTitleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            optionTitleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
         ])
     }
     
