@@ -53,7 +53,25 @@ class SettingsViewController: UIViewController {
         sections.append(leaveHistorySetting)
     }
     
-    private func didSelectOption() {
+    private func didSelectOption(_ option: SettingValue) {
+        switch option {
+        case .copyScopeOnlyAccountNumber:
+            print(option)
+        case .copyScopeIncludeBankName:
+            print(option)
+        case .copyScopeIncludeName:
+            print(option)
+        case .includeHyphenOn:
+            print(option)
+        case .includeHyphenOff:
+            print(option)
+        case .leaveHistoryEvery:
+            print(option)
+        case .leaveHistoryAsk:
+            print(option)
+        case .leaveHistoryNever:
+            print(option)
+        }
     }
 }
 
@@ -70,7 +88,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.configure(with: SettingsTableViewCellViewModel(title: "옵션 제목", isChecked: true))
+        
+        let section = sections[indexPath.section]
+        let item = section.settingValues
+        let option = item[indexPath.row]
+
+        cell.configure(with: SettingsTableViewCellViewModel(title: SettingValue.getTitle(of: option), isChecked: true))
         return cell
     }
     
@@ -104,6 +127,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let section = sections[indexPath.section]
         let item = section.settingValues
-        print(section, item)
+        let option = item[indexPath.row]
+        self.didSelectOption(option)
     }
 }
