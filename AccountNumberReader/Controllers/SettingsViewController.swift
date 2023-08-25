@@ -40,17 +40,20 @@ class SettingsViewController: UIViewController {
     private func configureSections() {
         let copyScopeSetting = AppSetting.init(
             settingKey: .copyScope,
-            settingValues: [CopyScope.onlyAccountNumber.rawValue, CopyScope.includeBankName.rawValue, CopyScope.includeName.rawValue])
+            settingValues: [.copyScopeOnlyAccountNumber, .copyScopeIncludeBankName, .copyScopeIncludeName])
         let includeHyphenSetting = AppSetting.init(
             settingKey: .includeHyphen,
-            settingValues: [IncludeHyphen.on.rawValue, IncludeHyphen.off.rawValue])
+            settingValues: [.includeHyphenOn, .includeHyphenOff])
         let leaveHistorySetting = AppSetting.init(
             settingKey: .leaveHistory,
-            settingValues: [LeaveHistory.every.rawValue, LeaveHistory.ask.rawValue, LeaveHistory.never.rawValue])
+            settingValues: [.leaveHistoryEvery, .leaveHistoryAsk, .leaveHistoryNever])
         
         sections.append(copyScopeSetting)
         sections.append(includeHyphenSetting)
         sections.append(leaveHistorySetting)
+    }
+    
+    private func didSelectOption() {
     }
 }
 
@@ -98,5 +101,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let section = sections[indexPath.section]
+        let item = section.settingValues
+        print(section, item)
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 struct AppSetting {
     var settingKey: SettingKey
-    var settingValues: [String]
+    var settingValues: [SettingValue]
 }
 
 enum SettingKey: String {
@@ -11,19 +11,13 @@ enum SettingKey: String {
     case leaveHistory
 }
 
-enum CopyScope: String {
-    case onlyAccountNumber // 0
-    case includeBankName
-    case includeName
-}
-
-enum IncludeHyphen: String {
-    case on
-    case off
-}
-
-enum LeaveHistory: String {
-    case every
-    case ask
-    case never
+enum SettingValue: String {
+    case copyScopeOnlyAccountNumber
+    case copyScopeIncludeBankName
+    case copyScopeIncludeName
+    case includeHyphenOn
+    case includeHyphenOff
+    case leaveHistoryEvery
+    case leaveHistoryAsk
+    case leaveHistoryNever
 }
