@@ -37,7 +37,8 @@ class SettingsHeaderView: UITableViewHeaderFooterView {
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     

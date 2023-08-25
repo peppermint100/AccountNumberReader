@@ -14,23 +14,25 @@ class SettingsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
-        label.font = .systemFont(ofSize: 13)
-        label.backgroundColor = .red
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
     private var checkButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.backgroundColor = .green
+        let buttonImage = UIImage(
+            systemName: "checkmark",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular))
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .systemBlue
         return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(optionTitleLabel)
-        addSubview(checkButton)
+        contentView.addSubview(optionTitleLabel)
+        contentView.addSubview(checkButton)
         applyConstraint()
     }
     
@@ -40,15 +42,15 @@ class SettingsTableViewCell: UITableViewCell {
     
     private func applyConstraint() {
         NSLayoutConstraint.activate([
-            optionTitleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            optionTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            optionTitleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            optionTitleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            optionTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            optionTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            checkButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
         ])
     }
     
     func configure(with viewModel: SettingsTableViewCellViewModel) {
         optionTitleLabel.text = viewModel.title
-        checkButton.setImage(nil, for: .normal)
+        checkButton.isHidden = !viewModel.isChecked
     }
 }
