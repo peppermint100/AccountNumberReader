@@ -7,7 +7,6 @@
 
 import Foundation
 
-struct SettingsTableViewCellViewModel {
-    var title: String
-    var isChecked: Bool
+struct SettingElementViewModel {
+    var settingElement: SettingElement
 }

@@ -8,8 +8,11 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    var sections: [SettingSection] = []
     
-    var sections: [AppSetting] = []
+    var copyScopeOption: SettingElement = .copyScope(.includeBankName)
+    var includeHyphenOption: SettingElement = .includeHyphen(.on)
+    var leaveHistoryOption: SettingElement = .leaveHistory(.every)
     
     private let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .insetGrouped)
@@ -38,40 +41,22 @@ class SettingsViewController: UIViewController {
     }
     
     private func configureSections() {
-        let copyScopeSetting = AppSetting.init(
-            settingKey: .copyScope,
-            settingValues: [.copyScopeOnlyAccountNumber, .copyScopeIncludeBankName, .copyScopeIncludeName])
-        let includeHyphenSetting = AppSetting.init(
-            settingKey: .includeHyphen,
-            settingValues: [.includeHyphenOn, .includeHyphenOff])
-        let leaveHistorySetting = AppSetting.init(
-            settingKey: .leaveHistory,
-            settingValues: [.leaveHistoryEvery, .leaveHistoryAsk, .leaveHistoryNever])
-        
+        let copyScopeSetting = SettingSection(
+            settingElement: copyScopeOption,
+            settingValues: copyScopeOption.options)
+        let includeHyphenSetting = SettingSection(
+            settingElement: includeHyphenOption,
+            settingValues: includeHyphenOption.options)
+        let leaveHistorySetting = SettingSection(
+            settingElement: leaveHistoryOption,
+            settingValues: leaveHistoryOption.options)
+               
         sections.append(copyScopeSetting)
         sections.append(includeHyphenSetting)
         sections.append(leaveHistorySetting)
     }
     
-    private func didSelectOption(_ option: SettingValue) {
-        switch option {
-        case .copyScopeOnlyAccountNumber:
-            print(option)
-        case .copyScopeIncludeBankName:
-            print(option)
-        case .copyScopeIncludeName:
-            print(option)
-        case .includeHyphenOn:
-            print(option)
-        case .includeHyphenOff:
-            print(option)
-        case .leaveHistoryEvery:
-            print(option)
-        case .leaveHistoryAsk:
-            print(option)
-        case .leaveHistoryNever:
-            print(option)
-        }
+    private func didSelectOption() {
     }
 }
 
@@ -80,21 +65,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let setting = sections[section]
         return setting.settingValues.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath)
-                as? SettingsTableViewCell
-        else {
-            return UITableViewCell()
-        }
-        
-        let section = sections[indexPath.section]
-        let item = section.settingValues
-        let option = item[indexPath.row]
-
-        cell.configure(with: SettingsTableViewCellViewModel(title: SettingValue.getTitle(of: option), isChecked: true))
-        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,18 +78,27 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewHeaderFooterView()
         }
         
-        let setting = sections[section]
-        
-        switch setting.settingKey {
-        case .copyScope:
-            headerView.configure(with: SettingsHeaderViewViewModel(title: "계좌번호 복사 범위"))
-        case .includeHyphen:
-            headerView.configure(with: SettingsHeaderViewViewModel(title: "하이픈 포함"))
-        case .leaveHistory:
-            headerView.configure(with: SettingsHeaderViewViewModel(title: "스캔 내역"))
-        }
+        let section = sections[section]
+        let settingElement = section.settingElement
+        headerView.configure(with: SettingElementViewModel(settingElement: settingElement))
         
         return headerView;
+    }
+        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath)
+                as? SettingsTableViewCell
+        else {
+            return UITableViewCell()
+        }
+        
+        let section = sections[indexPath.section]
+        let settingElement = section.settingElement
+        let option = section.settingValues[indexPath.row]
+        
+        cell.configure(with: SettingTableViewCellViewModel(settingElement: settingElement, settingValue: option))
+
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -128,6 +107,5 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let section = sections[indexPath.section]
         let item = section.settingValues
         let option = item[indexPath.row]
-        self.didSelectOption(option)
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct SettingsHeaderViewViewModel {
-    var title: String
+struct SettingTableViewCellViewModel {
+    var settingElement: SettingElement
+    var settingValue: String
 }

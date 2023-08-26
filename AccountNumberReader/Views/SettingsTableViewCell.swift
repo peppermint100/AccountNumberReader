@@ -49,8 +49,47 @@ class SettingsTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with viewModel: SettingsTableViewCellViewModel) {
-        optionTitleLabel.text = viewModel.title
-        checkButton.isHidden = !viewModel.isChecked
+    func configure(with viewModel: SettingTableViewCellViewModel) {
+        let settingElement = viewModel.settingElement
+        let option = viewModel.settingValue
+        switch viewModel.settingElement {
+        case .copyScope(let selected):
+            let settingValue = CopyScope(rawValue: option)
+            checkButton.isHidden = option != selected.rawValue
+            switch settingValue {
+            case .onlyAccountNumber:
+                optionTitleLabel.text = "계좌번호"
+            case .includeBankName:
+                optionTitleLabel.text = "계좌번호, 은행명"
+            case .includeName:
+                optionTitleLabel.text = "계좌번호, 은행명, 이름"
+            default:
+                optionTitleLabel.text = "-"
+            }
+        case .includeHyphen(let selected):
+            checkButton.isHidden = option != selected.rawValue
+            let settingValue = IncludeHyphen(rawValue: option)
+            switch settingValue {
+            case .on:
+                optionTitleLabel.text = "포함"
+            case .off:
+                optionTitleLabel.text = "미포함"
+            default:
+                optionTitleLabel.text = "-"
+            }
+        case .leaveHistory(let selected):
+            checkButton.isHidden = option != selected.rawValue
+            let settingValue = LeaveHistory(rawValue: option)
+            switch settingValue{
+            case .every:
+                optionTitleLabel.text = "매 스캔마다"
+            case .ask:
+                optionTitleLabel.text = "매번 물어보기"
+            case .never:
+                optionTitleLabel.text = "저장하지 않음"
+            default:
+                optionTitleLabel.text = "-"
+            }
+        }
     }
 }

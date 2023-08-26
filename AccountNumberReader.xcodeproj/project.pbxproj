@@ -15,10 +15,11 @@
 		BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9832A94AEEC00D31A7A /* CameraViewController.swift */; };
 		BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9852A94AEF300D31A7A /* HistoryViewController.swift */; };
 		BA05E9882A94AEFA00D31A7A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */; };
-		BA05E98A2A97800000D31A7A /* SettingsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9892A97800000D31A7A /* SettingsTableViewCellViewModel.swift */; };
+		BA05E98A2A97800000D31A7A /* SettingElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9892A97800000D31A7A /* SettingElementViewModel.swift */; };
+		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
 		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
-		E5B3AF6C2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */; };
+		E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */; };
 		E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +34,11 @@
 		BA05E9832A94AEEC00D31A7A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BA05E9852A94AEF300D31A7A /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		BA05E9892A97800000D31A7A /* SettingsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		BA05E9892A97800000D31A7A /* SettingElementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingElementViewModel.swift; sourceTree = "<group>"; };
+		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
-		E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderViewViewModel.swift; sourceTree = "<group>"; };
+		E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				E58823D22A95DE7400143953 /* Settings.swift */,
+				BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,8 +125,8 @@
 		E5B3AF6A2A9738B900A4E6E7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E5B3AF6B2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift */,
-				BA05E9892A97800000D31A7A /* SettingsTableViewCellViewModel.swift */,
+				E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */,
+				BA05E9892A97800000D31A7A /* SettingElementViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -198,15 +201,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5B3AF6C2A9738CD00A4E6E7 /* SettingsHeaderViewViewModel.swift in Sources */,
+				E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */,
 				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
+				BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,
 				BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */,
 				E58823D32A95DE7400143953 /* Settings.swift in Sources */,
 				BA05E96E2A94ADDD00D31A7A /* SceneDelegate.swift in Sources */,
-				BA05E98A2A97800000D31A7A /* SettingsTableViewCellViewModel.swift in Sources */,
+				BA05E98A2A97800000D31A7A /* SettingElementViewModel.swift in Sources */,
 				E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */,
 				BA05E9882A94AEFA00D31A7A /* SettingsViewController.swift in Sources */,
 			);
