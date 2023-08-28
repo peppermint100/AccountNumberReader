@@ -44,8 +44,8 @@ class SettingsViewController: UIViewController {
         if let copyScopeValueString = UserDefaultsManager.shared.load(SettingElement.copyScope(nil).keyName),
            let includeHyphenValueString = UserDefaultsManager.shared.load(SettingElement.includeHyphen(nil).keyName),
            let leaveHistoryValueString = UserDefaultsManager.shared.load(SettingElement.leaveHistory(nil).keyName)
-            copyScopeOption = .copyScope(CopyScope(rawValue: copyScopeValueString))
         {
+            copyScopeOption = .copyScope(CopyScope(rawValue: copyScopeValueString))
             includeHyphenOption = .includeHyphen(IncludeHyphen(rawValue: includeHyphenValueString))
             leaveHistoryOption = .leaveHistory(LeaveHistory(rawValue: leaveHistoryValueString))
         }
