@@ -24,8 +24,8 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
+        loadSettings()
         configureTableView()
-        configureSections()
     }
     
     override func viewDidLayoutSubviews() {
@@ -40,7 +40,18 @@ class SettingsViewController: UIViewController {
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
     }
     
-    private func configureSections() {
+    private func loadSettings() {
+        if let copyScopeValueString = UserDefaultsManager.shared.load(SettingElement.copyScope(nil).keyName),
+           let includeHyphenValueString = UserDefaultsManager.shared.load(SettingElement.includeHyphen(nil).keyName),
+           let leaveHistoryValueString = UserDefaultsManager.shared.load(SettingElement.leaveHistory(nil).keyName)
+            copyScopeOption = .copyScope(CopyScope(rawValue: copyScopeValueString))
+        {
+            includeHyphenOption = .includeHyphen(IncludeHyphen(rawValue: includeHyphenValueString))
+            leaveHistoryOption = .leaveHistory(LeaveHistory(rawValue: leaveHistoryValueString))
+        }
+        
+        sections = []
+        
         let copyScopeSetting = SettingSection(
             settingElement: copyScopeOption,
             settingValues: copyScopeOption.options)
@@ -56,7 +67,9 @@ class SettingsViewController: UIViewController {
         sections.append(leaveHistorySetting)
     }
     
-    private func didSelectOption() {
+    private func updateUI() {
+        loadSettings()
+        tableView.reloadData()
     }
 }
 
@@ -107,5 +120,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let section = sections[indexPath.section]
         let item = section.settingValues
         let option = item[indexPath.row]
+        
+        UserDefaultsManager.shared.save(key: section.settingElement.keyName, value: option)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.updateUI()
+        }
     }
 }

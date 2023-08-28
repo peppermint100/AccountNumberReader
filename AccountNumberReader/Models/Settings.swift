@@ -1,9 +1,9 @@
 import Foundation
 
 enum SettingElement {
-    case copyScope(CopyScope)
-    case includeHyphen(IncludeHyphen)
-    case leaveHistory(LeaveHistory)
+    case copyScope(CopyScope?)
+    case includeHyphen(IncludeHyphen?)
+    case leaveHistory(LeaveHistory?)
     
     var keyName: String {
         get {

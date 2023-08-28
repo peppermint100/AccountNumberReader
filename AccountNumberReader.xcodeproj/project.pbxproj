@@ -18,6 +18,7 @@
 		BA05E98A2A97800000D31A7A /* SettingElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E9892A97800000D31A7A /* SettingElementViewModel.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
+		E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */; };
 		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
 		E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */; };
 		E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */; };
@@ -37,6 +38,7 @@
 		BA05E9892A97800000D31A7A /* SettingElementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingElementViewModel.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				E58823D22A95DE7400143953 /* Settings.swift */,
 				BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */,
+				E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */,
 				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
 				BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */,
+				E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,

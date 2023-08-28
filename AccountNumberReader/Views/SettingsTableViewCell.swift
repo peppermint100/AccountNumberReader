@@ -10,7 +10,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     static let identifier = "SettingsTableViewCell"
     
-    private var optionTitleLabel: UILabel = {
+    var optionTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
@@ -55,7 +55,7 @@ class SettingsTableViewCell: UITableViewCell {
         switch viewModel.settingElement {
         case .copyScope(let selected):
             let settingValue = CopyScope(rawValue: option)
-            checkButton.isHidden = option != selected.rawValue
+            checkButton.isHidden = option != selected?.rawValue
             switch settingValue {
             case .onlyAccountNumber:
                 optionTitleLabel.text = "계좌번호"
@@ -67,7 +67,7 @@ class SettingsTableViewCell: UITableViewCell {
                 optionTitleLabel.text = "-"
             }
         case .includeHyphen(let selected):
-            checkButton.isHidden = option != selected.rawValue
+            checkButton.isHidden = option != selected?.rawValue
             let settingValue = IncludeHyphen(rawValue: option)
             switch settingValue {
             case .on:
@@ -78,7 +78,7 @@ class SettingsTableViewCell: UITableViewCell {
                 optionTitleLabel.text = "-"
             }
         case .leaveHistory(let selected):
-            checkButton.isHidden = option != selected.rawValue
+            checkButton.isHidden = option != selected?.rawValue
             let settingValue = LeaveHistory(rawValue: option)
             switch settingValue{
             case .every:
