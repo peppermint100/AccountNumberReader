@@ -40,7 +40,7 @@ class MainTabBarViewController: UITabBarController {
         nav2.tabBarItem = UITabBarItem(title: "히스토리", image: UIImage(systemName: "list.bullet"), tag: 2)
         nav3.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 3)
         
-        setViewControllers([nav3, nav2, nav1], animated: true)
+        setViewControllers([nav2, nav3, nav1], animated: true)
     }
 }
 
