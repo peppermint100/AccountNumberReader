@@ -22,6 +22,10 @@
 		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
 		E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */; };
 		E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */; };
+		E5C910242A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5C910222A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld */; };
+		E5C910272A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C910252A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift */; };
+		E5C910282A9DD2F5000AC5CA /* HistoryMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C910262A9DD2F5000AC5CA /* HistoryMO+CoreDataProperties.swift */; };
+		E5C9102A2A9DD433000AC5CA /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C910292A9DD433000AC5CA /* HistoryManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		E5B3AF6B2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		E5B3AF6D2A97398900A4E6E7 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E5C910232A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CameraAppCoreData.xcdatamodel; sourceTree = "<group>"; };
+		E5C910252A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E5C910262A9DD2F5000AC5CA /* HistoryMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E5C910292A9DD433000AC5CA /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +129,10 @@
 				E58823D22A95DE7400143953 /* Settings.swift */,
 				BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */,
 				E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */,
+				E5C910222A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld */,
+				E5C910252A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift */,
+				E5C910262A9DD2F5000AC5CA /* HistoryMO+CoreDataProperties.swift */,
+				E5C910292A9DD433000AC5CA /* HistoryManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -207,15 +219,19 @@
 				E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */,
 				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
 				BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */,
+				E5C910272A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift in Sources */,
 				E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
+				E5C910242A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,
 				BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */,
 				E58823D32A95DE7400143953 /* Settings.swift in Sources */,
 				BA05E96E2A94ADDD00D31A7A /* SceneDelegate.swift in Sources */,
 				BA05E98A2A97800000D31A7A /* SettingElementViewModel.swift in Sources */,
+				E5C9102A2A9DD433000AC5CA /* HistoryManager.swift in Sources */,
 				E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */,
+				E5C910282A9DD2F5000AC5CA /* HistoryMO+CoreDataProperties.swift in Sources */,
 				BA05E9882A94AEFA00D31A7A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +455,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E5C910222A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E5C910232A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodel */,
+			);
+			currentVersion = E5C910232A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodel */;
+			path = CameraAppCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BA05E9602A94ADDD00D31A7A /* Project object */;
 }
