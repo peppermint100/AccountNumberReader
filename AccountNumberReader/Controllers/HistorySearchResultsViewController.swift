@@ -28,7 +28,7 @@ class HistorySearchResultsViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(HistorySearchResultsTableViewCell.self, forCellReuseIdentifier: HistorySearchResultsTableViewCell.identifier)
     }
 }
 
@@ -43,9 +43,11 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .clear
-        cell.textLabel?.text = "텍스트"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistorySearchResultsTableViewCell.identifier, for: indexPath)
+                as? HistorySearchResultsTableViewCell else {
+            return UITableViewCell()
+        }
+        
         return cell
     }
 }
