@@ -16,7 +16,4 @@ final class HistoryManager {
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
-    
-    func getHistories() {
-    }
 }

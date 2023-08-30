@@ -19,6 +19,7 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureSearchController()
+        searchController.searchBar.text = "123"
     }
     
     private func configureSearchController() {

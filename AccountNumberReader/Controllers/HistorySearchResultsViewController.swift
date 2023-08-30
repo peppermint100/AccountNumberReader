@@ -42,6 +42,10 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
         return 5
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistorySearchResultsTableViewCell.identifier, for: indexPath)
                 as? HistorySearchResultsTableViewCell else {
@@ -49,5 +53,9 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
