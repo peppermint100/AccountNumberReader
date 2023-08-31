@@ -11,5 +11,4 @@ import CoreData
 
 @objc(HistoryMO)
 public class HistoryMO: NSManagedObject {
-
 }

@@ -20,4 +20,13 @@ struct History {
 //    @NSManaged public var image: Data?
 //    @NSManaged public var createdAt: Date?
 //    @NSManaged public var isPinned: Bool
+    
+    init(from historyMO: HistoryMO) {
+        self.id = historyMO.id!
+        self.title = historyMO.title!
+        self.content = historyMO.content!
+        self.image = UIImage(data: historyMO.image!)!
+        self.createdAt = historyMO.createdAt!
+        self.isPinned = historyMO.isPinned
+    }
 }

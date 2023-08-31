@@ -52,6 +52,16 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
             return UITableViewCell()
         }
         
+        let historySample = History(
+            id: UUID(),
+            title: "제목",
+            content: "이것저것이것저것이것저것이것저것이것저것이것저것이것저것",
+            image: UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!,
+            createdAt: Date(),
+            isPinned: false)
+        
+        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: historySample))
+        
         return cell
     }
     

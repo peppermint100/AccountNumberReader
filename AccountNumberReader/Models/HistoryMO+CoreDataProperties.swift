@@ -26,5 +26,4 @@ extension HistoryMO {
 }
 
 extension HistoryMO : Identifiable {
-
 }
