@@ -50,7 +50,6 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "제목"
         return label
     }()
     
@@ -58,7 +57,6 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "국민 123-123-12345 이인규 fdewafkjawekfajwehkfjhawejkfhawelfhlawehfjkalwehfjlkawehfiewahfkjlawehflakjwhewjlfhwaejkfhawlkfhw"
         label.numberOfLines = 0
         label.textAlignment = .left
         label.lineBreakMode = .byTruncatingTail
@@ -71,7 +69,6 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
-        label.text = "2023-08-01 12:05:33"
         label.numberOfLines = 0
         return label
     }()
@@ -123,5 +120,13 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    func configure(with viewModel: HistorySearchResultsTableViewCellViewModel) {
+        let history = viewModel.history
+        titleLabel.text = history.title
+        scannedTextLabel.text = history.content
+        scannedImageView.image = history.image
+        createdAtLabel.text = history.createdAt.toString()
     }
 }

@@ -11,9 +11,17 @@ import CoreData
 final class HistoryManager {
     
     static let shared = HistoryManager()
+    let modelName: String = "History"
     
     private init() {}
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     lazy var context = appDelegate?.persistentContainer.viewContext
+    
+    func getHistories() -> [History] {
+        return []
+    }
+    
+    func addHistory(_: History) {
+    }
 }
