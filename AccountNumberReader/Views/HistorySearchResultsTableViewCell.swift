@@ -36,7 +36,7 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
     
     let historyDetailsButton: UIButton = {
         let button = UIButton()
-        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 22, weight: .semibold)
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
         let buttonImage = UIImage(
             systemName: "chevron.compact.right",
             withConfiguration: imageConfiguration)
@@ -58,8 +58,11 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "국민 123-123-12345 이인규"
+        label.text = "국민 123-123-12345 이인규 fdewafkjawekfajwehkfjhawejkfhawelfhlawehfjkalwehfjlkawehfiewahfkjlawehflakjwhewjlfhwaejkfhawlkfhw"
         label.numberOfLines = 0
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
+        label.textColor = .secondaryLabel
         return label
     }()
 
@@ -100,10 +103,22 @@ class HistorySearchResultsTableViewCell: UITableViewCell {
         let historyDetailsButtonConstraints = [
             historyDetailsButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1)
         ]
+        let titleLabelConstraints = [
+            titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
+        ]
+        let scannedTextLabelConstraints = [
+            scannedTextLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5),
+        ]
+        let createdAtLabelConstraints = [
+            createdAtLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2)
+        ]
         
         NSLayoutConstraint.activate(scannedImageViewConstraints)
         NSLayoutConstraint.activate(historyDetailsViewConstraints)
         NSLayoutConstraint.activate(historyDetailsButtonConstraints)
+        NSLayoutConstraint.activate(titleLabelConstraints)
+        NSLayoutConstraint.activate(scannedTextLabelConstraints)
+        NSLayoutConstraint.activate(createdAtLabelConstraints)
     }
     
     required init?(coder: NSCoder) {
