@@ -41,21 +41,23 @@ final class HistoryManager {
     
     func addHistory(_ history: History, completion: @escaping () -> Void) {
         if let context = context {
-            if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) as? HistoryMO {
-                entity.id = history.id
-                entity.title = history.title
-                entity.content = history.content
-                entity.createdAt = history.createdAt
-                entity.image = history.image.jpegData(compressionQuality: 1.0)
-                entity.isPinned = history.isPinned
-                
-                if (context.hasChanges) {
-                    do {
-                        try context.save()
-                        completion()
-                    } catch {
-                        print(error.localizedDescription)
-                        completion()
+            if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
+                if let historySaved = NSManagedObject(entity: entity, insertInto: context) as? HistoryMO {
+                    historySaved.id = history.id
+                    historySaved.title = history.title
+                    historySaved.content = history.content
+                    historySaved.createdAt = history.createdAt
+                    historySaved.image = history.image.jpegData(compressionQuality: 1.0)
+                    historySaved.isPinned = history.isPinned
+                    
+                    if (context.hasChanges) {
+                        do {
+                            try context.save()
+                            completion()
+                        } catch {
+                            print(error.localizedDescription)
+                            completion()
+                        }
                     }
                 }
             }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistorySearchResultsTableViewCell: UITableViewCell {
+class HistoryTableViewCell: UITableViewCell {
     
     static let identifier = "HistorySearchResultsTableViewCell"
     

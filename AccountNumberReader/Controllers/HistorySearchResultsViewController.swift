@@ -28,7 +28,7 @@ class HistorySearchResultsViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(HistorySearchResultsTableViewCell.self, forCellReuseIdentifier: HistorySearchResultsTableViewCell.identifier)
+        tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
     }
 }
 
@@ -47,15 +47,15 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistorySearchResultsTableViewCell.identifier, for: indexPath)
-                as? HistorySearchResultsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.identifier, for: indexPath)
+                as? HistoryTableViewCell else {
             return UITableViewCell()
         }
         
         let historySample = History(
             id: UUID(),
             title: "제목",
-            content: "이것저것이것저것이것저것이것저것이것저것이것저것이것저것",
+            content: "이것저것이것저것이것저것이것저것이것저것이것저것이것저것fwaefjwaklefjwalefjklawefjawejkfajew",
             image: UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!,
             createdAt: Date(),
             isPinned: false)
