@@ -63,4 +63,29 @@ final class HistoryManager {
             }
         }
     }
+    
+    func searchHistory(_ query: String) -> [History] {
+        var result: [History] = []
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+        let titleLike = NSPredicate(format: "title CONTAINS %@", query)
+        let createdAtDesc = NSSortDescriptor(key: "createdAt", ascending: false)
+        
+        request.predicate = titleLike
+        request.sortDescriptors = [createdAtDesc]
+        
+        do {
+            guard let histories = try context?.fetch(request) as? [HistoryMO] else {
+                return result
+            }
+            result = histories.map({ historyMO in
+                return History.init(from: historyMO)
+            })
+        } catch {
+            print(error.localizedDescription)
+            return result
+        }
+        
+        return result
+    }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class HistorySearchResultsViewController: UIViewController {
+    var histories: [History] = []
     
     let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
@@ -30,16 +31,17 @@ class HistorySearchResultsViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
     }
+    
+    func update(with results: [History]) {
+        histories = results
+        tableView.reloadData()
+    }
 }
 
 // MARK: TableView Delegate
 extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return histories.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -52,15 +54,9 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
             return UITableViewCell()
         }
         
-        let historySample = History(
-            id: UUID(),
-            title: "제목",
-            content: "이것저것이것저것이것저것이것저것이것저것이것저것이것저것fwaefjwaklefjwalefjklawefjawejkfajew",
-            image: UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!,
-            createdAt: Date(),
-            isPinned: false)
+        let history = histories[indexPath.row]
         
-        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: historySample))
+        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: history))
         
         return cell
     }

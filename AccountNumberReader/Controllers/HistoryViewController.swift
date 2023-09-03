@@ -11,6 +11,8 @@ class HistoryViewController: UIViewController {
     
     var histories: [History] = []
     
+    var timerForDebounce: Timer?
+    
     let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         return tv
@@ -39,7 +41,7 @@ class HistoryViewController: UIViewController {
             createdAt: Date(),
             isPinned: false)
         
-        HistoryManager.shared.addHistory(historySample) {
+        HistoryManager.shared.addHistory(historySample) { [weak self] in
             print("History 저장완료 hisory: \(historySample)")
         }
     }
@@ -77,10 +79,13 @@ class HistoryViewController: UIViewController {
     
     private func configureTableView() {
         view.addSubview(tableView)
-//        tableView.register(HistorySearchResultsTableViewCell.self, forCellReuseIdentifier: HistorySearchResultsTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
+    }
+    
+    private func getHistoriesWithQuery(_ query: String) -> [History] {
+        return HistoryManager.shared.searchHistory(query)
     }
 }
 
@@ -117,6 +122,21 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: SearchBarExtensions
 extension HistoryViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text)
+        timerForDebounce?.invalidate()
+        timerForDebounce = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
+            guard let searchResultController = 
+                    searchController.searchResultsController as? HistorySearchResultsViewController,
+                  let query = searchController.searchBar.text,
+                  !query.trimmingCharacters(in: .whitespaces).isEmpty
+            else {
+                return
+            }
+            
+            print("\(query) 로 검색을 시작합니다")
+            
+            let historySearched = self?.getHistoriesWithQuery(query)
+            print("검색 결과: \(historySearched)")
+            searchResultController.update(with: historySearched ?? [])
+        }
     }
 }
