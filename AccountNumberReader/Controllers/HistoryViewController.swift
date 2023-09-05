@@ -44,6 +44,8 @@ class HistoryViewController: UIViewController {
         HistoryManager.shared.addHistory(historySample) { [weak self] in
             print("History 저장완료 hisory: \(historySample)")
         }
+        
+        getHistories()
     }
     
     private func configureAddHistoryTempButton() {
@@ -70,6 +72,10 @@ class HistoryViewController: UIViewController {
     private func getHistories() {
         let historiesFetched = HistoryManager.shared.getHistories()
         histories = historiesFetched
+         
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     private func configureSearchController() {
@@ -116,6 +122,10 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let history = histories[indexPath.row]
+        let vc = HistoryDetailsViewController()
+        vc.history = history
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

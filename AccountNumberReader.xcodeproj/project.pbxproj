@@ -19,6 +19,7 @@
 		BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */; };
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
+		E52031032AA703E2007540AB /* HistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
 		E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */; };
 		E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */; };
@@ -48,6 +49,7 @@
 		BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchResultsViewController.swift; sourceTree = "<group>"; };
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
+		E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsViewController.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E5B3AF682A972FE400A4E6E7 /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				BA05E9852A94AEF300D31A7A /* HistoryViewController.swift */,
 				BA05E9872A94AEFA00D31A7A /* SettingsViewController.swift */,
 				BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */,
+				E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B3AF6C2A9738CD00A4E6E7 /* SettingTableViewCellViewModel.swift in Sources */,
+				E52031032AA703E2007540AB /* HistoryDetailsViewController.swift in Sources */,
 				E5B3AF692A972FE400A4E6E7 /* SettingsHeaderView.swift in Sources */,
 				BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */,
 				E5BA17392AA07D9500A43205 /* extensions.swift in Sources */,
