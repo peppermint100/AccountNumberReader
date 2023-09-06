@@ -3,87 +3,82 @@ import UIKit
 class HistoryDetailsViewController: UIViewController {
     
     var history: History?
+    var items: [HistoryDetailsTableViewCellViewModel] = []
     
-    private let stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.axis = .vertical
-        sv.distribution = .fillProportionally
-        return sv
-    }()
-    
-    private let imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let contentLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let createdAtLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .light)
-        label.textColor = .secondaryLabel
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let tableView: UITableView = {
+        let tv = UITableView()
+        return tv
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(contentLabel)
-        stackView.addArrangedSubview(createdAtLabel)
         configureUI()
+        configureTableView()
         applyConstraints()
     }
     
+    override func viewDidLayoutSubviews() {
+        tableView.frame = view.bounds
+    }
+    
     private func configureUI() {
-        imageView.image = history?.image
-        titleLabel.text = history?.title
-        contentLabel.text = history?.content
-        createdAtLabel.text = history?.createdAt.toString()
+        view.addSubview(tableView)
+    }
+    
+    private func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.register(HistoryDetailsTableViewCell.self, forCellReuseIdentifier: HistoryDetailsTableViewCell.identifier)
+        tableView.register(HistoryDetailsHeaderView.self, forHeaderFooterViewReuseIdentifier: HistoryDetailsHeaderView.identifier)
+        
+        let titleVM = HistoryDetailsTableViewCellViewModel(title: "제목", value: "반찬 가게 1")
+        let contentVM = HistoryDetailsTableViewCellViewModel(title: "복사 내용", value: "123-456-78910 국민")
+        let createdAtVM = HistoryDetailsTableViewCellViewModel(title: "스캔 시간", value: "2023-11-28 00:00:00")
+        
+        items.append(titleVM)
+        items.append(contentVM)
+        items.append(createdAtVM)
     }
     
     private func applyConstraints() {
-        let stackViewConstraints = [
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
+    }
+}
+
+extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailsTableViewCell.identifier, for: indexPath) as? HistoryDetailsTableViewCell else {
+            return UITableViewCell()
+        }
+        let vm = items[indexPath.row]
+        cell.configure(with: vm)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HistoryDetailsHeaderView.identifier) as? HistoryDetailsHeaderView else {
+            return UITableViewHeaderFooterView()
+        }
         
-        let imageViewConstraints = [
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6)
-        ]
-        let titleLabelConstraints = [
-            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
-        ]
-        let contentLabelConstraints = [
-            contentLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
-        ]
-        let createdAtLabelConstraints = [
-            createdAtLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
-        ]
+        headerView.configure(with: HistoryDetailsHeaderViewViewModel(image: UIImage(systemName: "square.and.arrow.up.fill") ?? nil))
         
-        NSLayoutConstraint.activate(stackViewConstraints)
-        NSLayoutConstraint.activate(titleLabelConstraints)
-        NSLayoutConstraint.activate(contentLabelConstraints)
-        NSLayoutConstraint.activate(createdAtLabelConstraints)
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }
