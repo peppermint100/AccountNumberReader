@@ -69,9 +69,11 @@ final class HistoryManager {
         
         let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
         let titleLike = NSPredicate(format: "title CONTAINS %@", query)
+        let contentLike = NSPredicate(format: "content CONTAINS %@", query)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titleLike, contentLike])
         let createdAtDesc = NSSortDescriptor(key: "createdAt", ascending: false)
         
-        request.predicate = titleLike
+        request.predicate = predicate
         request.sortDescriptors = [createdAtDesc]
         
         do {
@@ -87,5 +89,64 @@ final class HistoryManager {
         }
         
         return result
+    }
+    
+    func updateTitle(id: UUID, title: String) {
+        print("HistoryManager updateTitle 호출")
+        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+        let equalId = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        request.predicate = equalId
+        
+        if let context {
+            do {
+                let history = try context.fetch(request) as? [HistoryMO]
+                print("history = ", history)
+                history?.first?.title = title
+                if (context.hasChanges) {
+                    print("history context hasChanges")
+                    try context.save()
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func updateContent(id: UUID, content: String) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+        let equalId = NSPredicate(format: "id == %@", id.uuidString)
+        
+        request.predicate = equalId
+        
+        if let context {
+            do {
+                let history = try context.fetch(request) as? [HistoryMO]
+                history?.first?.content = content
+                if (context.hasChanges) {
+                    try context.save()
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getHistoryById(id: UUID) -> HistoryMO? {
+        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+        let equalId = NSPredicate(format: "id == %@", id.uuidString)
+        
+        request.predicate = equalId
+        
+        do {
+            guard let history = try context?.fetch(request) as? HistoryMO else {
+                return nil
+            }
+            return history
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return nil
     }
 }

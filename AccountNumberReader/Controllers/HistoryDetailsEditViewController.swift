@@ -3,7 +3,9 @@ import UIKit
 
 class HistoryDetailsEditViewController: UIViewController {
     
+    var historyId: UUID?
     var value: String?
+    var historyDetailsType: HistoryDetailsType?
     
     private let textField: UITextField = {
         let tf = UITextField()
@@ -58,6 +60,21 @@ class HistoryDetailsEditViewController: UIViewController {
         view.endEditing(true)
     }
     
+    // 여기서 textField값을 올려야함
     @objc private func didTapEditButton() {
+        let text = textField.text ?? ""
+        print("text = \(text)")
+        
+        switch historyDetailsType {
+        case .title:
+            HistoryManager.shared.updateTitle(id: historyId ?? UUID(), title: text)
+        case .content:
+            HistoryManager.shared.updateContent(id: historyId ?? UUID(), content: text)
+        default:
+            return
+        }
+        
+        // popViewController를 하고 HistoryDetailsViewController의 데이터를 리로드 해줘야 한다.
+        navigationController?.popViewController(animated: true)
     }
 }

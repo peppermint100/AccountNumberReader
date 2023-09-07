@@ -1,5 +1,10 @@
 import UIKit
 
+enum HistoryDetailsType {
+    case title
+    case content
+}
+
 class HistoryDetailsViewController: UIViewController {
     
     var history: History?
@@ -48,6 +53,14 @@ class HistoryDetailsViewController: UIViewController {
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
+    
+    private func updateTitle(id: UUID, title: String) {
+        HistoryManager.shared.updateTitle(id: id, title: title)
+    }
+    
+    private func updateContent(id: UUID, content: String) {
+        HistoryManager.shared.updateContent(id: id, content: content)
+    }
 }
 
 extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -85,14 +98,26 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // 3번째 메뉴인 스캔시간은 변경 불가능하도록
-        if (indexPath.row == 2) {
-            return
-        }
-        
+        let row = indexPath.row
+
         let item = items[indexPath.row]
         let vc = HistoryDetailsEditViewController()
         vc.value = item.value
+        vc.historyId = history?.id
+        
+        switch row {
+        case 0:
+            vc.historyDetailsType = .title
+            break
+        case 1:
+            vc.historyDetailsType = .content
+            break
+        case 2:
+            return
+        default:
+            return
+        }
+        
         vc.navigationItem.title = item.title
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
