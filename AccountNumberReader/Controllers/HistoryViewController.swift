@@ -93,6 +93,10 @@ class HistoryViewController: UIViewController {
     private func getHistoriesWithQuery(_ query: String) -> [History] {
         return HistoryManager.shared.searchHistory(query)
     }
+    
+    @objc private func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: TableViewExtensions
@@ -125,6 +129,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let history = histories[indexPath.row]
         let vc = HistoryDetailsViewController()
         vc.history = history
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -1,9 +1,6 @@
 //
 //  HistoryDetailsHeaderView.swift
 //  AccountNumberReader
-//
-//  Created by 이인규 on 2023/09/06.
-//
 
 import UIKit
 
@@ -19,12 +16,16 @@ class HistoryDetailsHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        backgroundColor = .red
         addSubview(imageView)
     }
     
     required init(coder: NSCoder) {
         fatalError()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = contentView.bounds
     }
     
     func configure(with viewModel: HistoryDetailsHeaderViewViewModel) {
