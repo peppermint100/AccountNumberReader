@@ -19,18 +19,28 @@ class HistoryDetailsViewController: UIViewController {
         return iv
     }()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let titleTextField: UITextField = {
+        let tf = UITextField()
+        tf.backgroundColor = .systemGray
+        tf.textColor = .white
+        tf.tintColor = .white
+        tf.autocapitalizationType = .none
+        tf.autocorrectionType = .no
+        tf.spellCheckingType = .no
+        tf.keyboardType = .emailAddress
+        return tf
     }()
     
-    private let contentLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let contentTextLabel: UITextField = {
+        let tf = UITextField()
+        tf.backgroundColor = .systemGray
+        tf.textColor = .white
+        tf.tintColor = .white
+        tf.autocapitalizationType = .none
+        tf.autocorrectionType = .no
+        tf.spellCheckingType = .no
+        tf.keyboardType = .emailAddress
+        return tf
     }()
     
     private let createdAtLabel: UILabel = {
@@ -46,8 +56,8 @@ class HistoryDetailsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(contentLabel)
+        stackView.addArrangedSubview(titleTextField)
+        stackView.addArrangedSubview(contentTextLabel)
         stackView.addArrangedSubview(createdAtLabel)
         configureUI()
         applyConstraints()
@@ -55,8 +65,8 @@ class HistoryDetailsViewController: UIViewController {
     
     private func configureUI() {
         imageView.image = history?.image
-        titleLabel.text = history?.title
-        contentLabel.text = history?.content
+        titleTextField.text = history?.title
+        contentTextLabel.text = history?.content
         createdAtLabel.text = history?.createdAt.toString()
     }
     
@@ -72,10 +82,10 @@ class HistoryDetailsViewController: UIViewController {
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6)
         ]
         let titleLabelConstraints = [
-            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
+            titleTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
         ]
         let contentLabelConstraints = [
-            contentLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+            contentTextLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ]
         let createdAtLabelConstraints = [
             createdAtLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
