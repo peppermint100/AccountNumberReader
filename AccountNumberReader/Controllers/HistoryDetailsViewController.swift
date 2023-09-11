@@ -53,14 +53,6 @@ class HistoryDetailsViewController: UIViewController {
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
-    
-    private func updateTitle(id: UUID, title: String) {
-        HistoryManager.shared.updateTitle(id: id, title: title)
-    }
-    
-    private func updateContent(id: UUID, content: String) {
-        HistoryManager.shared.updateContent(id: id, content: content)
-    }
 }
 
 extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,6 +94,7 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
 
         let item = items[indexPath.row]
         let vc = HistoryDetailsEditViewController()
+        vc.delegate = self
         vc.value = item.value
         vc.historyId = history?.id
         
@@ -122,5 +115,20 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HistoryDetailsViewController: HistoryDetailsEditViewControllerDelegate {
+    func didTapEditButton(historyId: UUID, historyDetailsType: HistoryDetailsType, value: String) {
+        print("HistoryDetailsViewController didTapEditButton")
+        switch historyDetailsType {
+        case .title:
+            history?.title = value
+            HistoryManager.shared.updateTitle(id: historyId, title: value)
+        case .content:
+            history?.content = value
+            HistoryManager.shared.updateContent(id: historyId, content: value)
+        }
+        tableView.reloadData()
     }
 }

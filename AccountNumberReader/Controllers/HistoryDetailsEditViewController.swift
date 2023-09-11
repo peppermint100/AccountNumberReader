@@ -1,7 +1,13 @@
 
 import UIKit
 
+protocol HistoryDetailsEditViewControllerDelegate: AnyObject {
+    func didTapEditButton(historyId: UUID, historyDetailsType: HistoryDetailsType, value: String)
+}
+
 class HistoryDetailsEditViewController: UIViewController {
+    
+    var delegate: HistoryDetailsEditViewControllerDelegate?
     
     var historyId: UUID?
     var value: String?
@@ -60,21 +66,12 @@ class HistoryDetailsEditViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // 여기서 textField값을 올려야함
     @objc private func didTapEditButton() {
+        print("HistoryDetailsEditViewController didTapEditButton")
         let text = textField.text ?? ""
         print("text = \(text)")
-        
-        switch historyDetailsType {
-        case .title:
-            HistoryManager.shared.updateTitle(id: historyId ?? UUID(), title: text)
-        case .content:
-            HistoryManager.shared.updateContent(id: historyId ?? UUID(), content: text)
-        default:
-            return
-        }
-        
-        // popViewController를 하고 HistoryDetailsViewController의 데이터를 리로드 해줘야 한다.
+
+        delegate?.didTapEditButton(historyId: self.historyId ?? UUID(), historyDetailsType: self.historyDetailsType ?? .title, value: text)
         navigationController?.popViewController(animated: true)
     }
 }
