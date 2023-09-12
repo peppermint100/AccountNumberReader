@@ -3,12 +3,13 @@ import UIKit
 enum HistoryDetailsType {
     case title
     case content
+    case createdAt
 }
 
 class HistoryDetailsViewController: UIViewController {
     
     var history: History?
-    var items: [HistoryDetailsTableViewCellViewModel] = []
+    var items: [HistoryDetails] = []
     
     private let tableView: UITableView = {
         let tv = UITableView()
@@ -37,14 +38,20 @@ class HistoryDetailsViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.register(HistoryDetailsTableViewCell.self, forCellReuseIdentifier: HistoryDetailsTableViewCell.identifier)
         tableView.register(HistoryDetailsHeaderView.self, forHeaderFooterViewReuseIdentifier: HistoryDetailsHeaderView.identifier)
-        
+
         let titleVM = HistoryDetailsTableViewCellViewModel(title: "제목", value: history?.title ?? "")
         let contentVM = HistoryDetailsTableViewCellViewModel(title: "복사 내용", value: history?.content ?? "")
         let createdAtVM = HistoryDetailsTableViewCellViewModel(title: "스캔 시간", value: history?.createdAt.toString() ?? "")
+                
+        let titleDetails = HistoryDetails(historyDetailsType: .title, historyDetailsViewModel: titleVM)
         
-        items.append(titleVM)
-        items.append(contentVM)
-        items.append(createdAtVM)
+        let contentDetails = HistoryDetails(historyDetailsType: .content, historyDetailsViewModel: contentVM)
+        
+        let createdAtDetails = HistoryDetails(historyDetailsType: .createdAt, historyDetailsViewModel: createdAtVM)
+       
+        items.append(titleDetails)
+        items.append(contentDetails)
+        items.append(createdAtDetails)
     }
     
     private func applyConstraints() {
@@ -72,8 +79,8 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailsTableViewCell.identifier, for: indexPath) as? HistoryDetailsTableViewCell else {
             return UITableViewCell()
         }
-        let vm = items[indexPath.row]
-        cell.configure(with: vm)
+        let item = items[indexPath.row]
+        cell.configure(with: item.historyDetailsViewModel)
         return cell
     }
 
@@ -94,9 +101,7 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
 
         let item = items[indexPath.row]
         let vc = HistoryDetailsEditViewController()
-        vc.delegate = self
-        vc.value = item.value
-        vc.historyId = history?.id
+        vc.history = history
         
         switch row {
         case 0:
@@ -111,7 +116,7 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        vc.navigationItem.title = item.title
+        vc.navigationItem.title = item.historyDetailsViewModel.title
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         navigationController?.pushViewController(vc, animated: true)
@@ -119,16 +124,10 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension HistoryDetailsViewController: HistoryDetailsEditViewControllerDelegate {
-    func didTapEditButton(historyId: UUID, historyDetailsType: HistoryDetailsType, value: String) {
-        print("HistoryDetailsViewController didTapEditButton")
-        switch historyDetailsType {
+    func didTapEditButton(newHistory: History?, type: HistoryDetailsType?) {
+        switch type {
         case .title:
-            history?.title = value
-            HistoryManager.shared.updateTitle(id: historyId, title: value)
         case .content:
-            history?.content = value
-            HistoryManager.shared.updateContent(id: historyId, content: value)
         }
-        tableView.reloadData()
     }
 }

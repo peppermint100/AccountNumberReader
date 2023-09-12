@@ -6,6 +6,7 @@
 
 import UIKit
 
+
 class HistoryDetailsTableViewCell: UITableViewCell {
     
     static let identifier = "HistoryDetailsTableViewCell"
