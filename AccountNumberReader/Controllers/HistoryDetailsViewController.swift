@@ -21,7 +21,11 @@ class HistoryDetailsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureUI()
         configureTableView()
-        applyConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -30,6 +34,9 @@ class HistoryDetailsViewController: UIViewController {
     
     private func configureUI() {
         view.addSubview(tableView)
+    }
+    
+    private func updateUI() {
     }
     
     private func configureTableView() {
@@ -52,9 +59,6 @@ class HistoryDetailsViewController: UIViewController {
         items.append(titleDetails)
         items.append(contentDetails)
         items.append(createdAtDetails)
-    }
-    
-    private func applyConstraints() {
     }
     
     @objc private func goBack() {
@@ -125,9 +129,17 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
 
 extension HistoryDetailsViewController: HistoryDetailsEditViewControllerDelegate {
     func didTapEditButton(newHistory: History?, type: HistoryDetailsType?) {
-        switch type {
-        case .title:
-        case .content:
+        if let newHistory {
+            switch type {
+            case .title:
+                HistoryManager.shared.updateTitle(id: newHistory.id, title: newHistory.title)
+            case .content:
+                HistoryManager.shared.updateContent(id: newHistory.id, content: newHistory.content)
+            case .createdAt:
+                return
+            default:
+                return
+            }
         }
     }
 }
