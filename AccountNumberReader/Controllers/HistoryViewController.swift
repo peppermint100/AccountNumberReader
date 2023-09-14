@@ -130,6 +130,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = HistoryDetailsViewController()
         vc.history = history
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
+        vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -147,10 +148,7 @@ extension HistoryViewController: UISearchResultsUpdating {
                 return
             }
             
-            print("\(query) 로 검색을 시작합니다")
-            
             let historySearched = self?.getHistoriesWithQuery(query)
-            print("검색 결과: \(historySearched)")
             searchResultController.update(with: historySearched ?? [])
         }
     }

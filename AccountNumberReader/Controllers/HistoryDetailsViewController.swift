@@ -5,15 +5,6 @@ class HistoryDetailsViewController: UIViewController {
     
     var history: History?
     
-    private let stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.axis = .vertical
-        sv.distribution = .fillProportionally
-        sv.backgroundColor = .systemGreen
-        return sv
-    }()
-    
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -21,20 +12,40 @@ class HistoryDetailsViewController: UIViewController {
         return iv
     }()
     
-//    private let detailsFormView: HistoryDetailsFormView = {
-//        let view = HistoryDetailsFormView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .green
-//        return view
-//    }()
-
+    private let formStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.distribution = .fillEqually
+        return sv
+    }()
+    
+    private let titleFormView: HistoryDetailsFormView = {
+        let view = HistoryDetailsFormView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let contentFormView: HistoryDetailsFormView = {
+        let view = HistoryDetailsFormView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let createdAtFormView: HistoryDetailsFormView = {
+        let view = HistoryDetailsFormView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .systemBackground
-        view.backgroundColor = .systemCyan
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
-//        stackView.addArrangedSubview(detailsFormView)
+        view.backgroundColor = .systemBackground
+        view.addSubview(imageView)
+        view.addSubview(formStackView)
+        formStackView.addArrangedSubview(titleFormView)
+        formStackView.addArrangedSubview(contentFormView)
+        formStackView.addArrangedSubview(createdAtFormView)
         applyConstraints()
         configureUI()
         configureForms()
@@ -42,25 +53,26 @@ class HistoryDetailsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        print(view.safeAreaInsets)
     }
     
     private func applyConstraints() {
-        let stackViewConstraints = [
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        let imageViewConstraints = [
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
         ]
-//        let imageViewConstraints = [
-//            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
-//        ]
-//        let detailsFormViewConstraints = [
-//            detailsFormView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
-//        ]
+        
+        let formStackViewConstraints = [
+            formStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            formStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            formStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            formStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15)
+        ]
 
-        NSLayoutConstraint.activate(stackViewConstraints)
-//        NSLayoutConstraint.activate(imageViewConstraints)
-//        NSLayoutConstraint.activate(detailsFormViewConstraints)
+        NSLayoutConstraint.activate(imageViewConstraints)
+        NSLayoutConstraint.activate(formStackViewConstraints)
     }
     
     @objc private func goBack() {
@@ -74,9 +86,9 @@ class HistoryDetailsViewController: UIViewController {
     }
     
     private func configureForms() {
-//        detailsFormView.configure(with:
-//            HistoryDetailsFormViewViewModel(title: "제목", value: "값")
-//        )
+        titleFormView.configure(with:HistoryDetailsFormViewViewModel(title: "제목", value: "값"))
+        contentFormView.configure(with:HistoryDetailsFormViewViewModel(title: "내용", value: "01-123-134124 국민"))
+        createdAtFormView.configure(with:HistoryDetailsFormViewViewModel(title: "날짜", value: "2023-09-13"))
     }
     
     private func toDetailVC() {

@@ -9,15 +9,6 @@ import UIKit
 
 class HistoryDetailsFormView: UIView {
     
-    private let stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.axis = .horizontal
-        sv.distribution = .fillEqually
-        sv.backgroundColor = .systemGray4
-        return sv
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -36,9 +27,9 @@ class HistoryDetailsFormView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(valueLabel)
+        addSubview(titleLabel)
+        addSubview(valueLabel)
+        applyConstraints()
     }
     
     override func layoutSubviews() {
@@ -51,12 +42,12 @@ class HistoryDetailsFormView: UIView {
     
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            titleLabel.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-            valueLabel.centerYAnchor.constraint(equalTo: stackView.centerYAnchor)
+            titleLabel.heightAnchor.constraint(equalTo: heightAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            valueLabel.heightAnchor.constraint(equalTo: heightAnchor),
+            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
