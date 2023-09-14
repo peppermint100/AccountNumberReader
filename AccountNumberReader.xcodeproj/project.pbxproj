@@ -19,6 +19,8 @@
 		BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */; };
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
+		E501059F2AB283B200151AF9 /* HistoryDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */; };
+		E50105A12AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50105A02AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift */; };
 		E52031032AA703E2007540AB /* HistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */; };
 		E58823D32A95DE7400143953 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58823D22A95DE7400143953 /* Settings.swift */; };
 		E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */; };
@@ -55,6 +57,8 @@
 		BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchResultsViewController.swift; sourceTree = "<group>"; };
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
+		E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsFormView.swift; sourceTree = "<group>"; };
+		E50105A02AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsFormViewViewModel.swift; sourceTree = "<group>"; };
 		E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsViewController.swift; sourceTree = "<group>"; };
 		E58823D22A95DE7400143953 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E5950BA82A9C38E20022F289 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */,
 				E5ED45D02AA84526002A1F22 /* HistoryDetailsTableViewCell.swift */,
 				E5ED45D42AA865A1002A1F22 /* HistoryDetailsHeaderView.swift */,
+				E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				E5BA17352AA07CD600A43205 /* HistorySearchResultsTableViewCellViewModel.swift */,
 				E5ED45D22AA84577002A1F22 /* HistoryDetailsTableViewCellViewModel.swift */,
 				E5ED45D62AA866AE002A1F22 /* HistoryDetailsHeaderViewViewModel.swift */,
+				E50105A02AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -276,6 +282,7 @@
 				E5C910242A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,
+				E50105A12AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift in Sources */,
 				E5ED45D12AA84526002A1F22 /* HistoryDetailsTableViewCell.swift in Sources */,
 				E5ED45D32AA84577002A1F22 /* HistoryDetailsTableViewCellViewModel.swift in Sources */,
 				BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */,
@@ -284,6 +291,7 @@
 				BA05E96E2A94ADDD00D31A7A /* SceneDelegate.swift in Sources */,
 				E5BA17342AA07C1D00A43205 /* History.swift in Sources */,
 				E5ED45D72AA866AE002A1F22 /* HistoryDetailsHeaderViewViewModel.swift in Sources */,
+				E501059F2AB283B200151AF9 /* HistoryDetailsFormView.swift in Sources */,
 				BA05E98A2A97800000D31A7A /* SettingElementViewModel.swift in Sources */,
 				E5C9102A2A9DD433000AC5CA /* HistoryManager.swift in Sources */,
 				E5B3AF6E2A97398900A4E6E7 /* SettingsTableViewCell.swift in Sources */,

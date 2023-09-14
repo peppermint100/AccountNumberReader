@@ -1,145 +1,89 @@
 import UIKit
 
-enum HistoryDetailsType {
-    case title
-    case content
-    case createdAt
-}
 
 class HistoryDetailsViewController: UIViewController {
     
     var history: History?
-    var items: [HistoryDetails] = []
     
-    private let tableView: UITableView = {
-        let tv = UITableView()
-        return tv
+    private let stackView: UIStackView = {
+        let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.distribution = .fillProportionally
+        sv.backgroundColor = .systemGreen
+        return sv
     }()
+    
+    private let imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
+    
+//    private let detailsFormView: HistoryDetailsFormView = {
+//        let view = HistoryDetailsFormView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .green
+//        return view
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+//        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemCyan
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(imageView)
+//        stackView.addArrangedSubview(detailsFormView)
+        applyConstraints()
         configureUI()
-        configureTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateUI()
+        configureForms()
     }
     
     override func viewDidLayoutSubviews() {
-        tableView.frame = view.bounds
+        super.viewDidLayoutSubviews()
     }
     
-    private func configureUI() {
-        view.addSubview(tableView)
-    }
-    
-    private func updateUI() {
-    }
-    
-    private func configureTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.register(HistoryDetailsTableViewCell.self, forCellReuseIdentifier: HistoryDetailsTableViewCell.identifier)
-        tableView.register(HistoryDetailsHeaderView.self, forHeaderFooterViewReuseIdentifier: HistoryDetailsHeaderView.identifier)
+    private func applyConstraints() {
+        let stackViewConstraints = [
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ]
+//        let imageViewConstraints = [
+//            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
+//        ]
+//        let detailsFormViewConstraints = [
+//            detailsFormView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
+//        ]
 
-        let titleVM = HistoryDetailsTableViewCellViewModel(title: "제목", value: history?.title ?? "")
-        let contentVM = HistoryDetailsTableViewCellViewModel(title: "복사 내용", value: history?.content ?? "")
-        let createdAtVM = HistoryDetailsTableViewCellViewModel(title: "스캔 시간", value: history?.createdAt.toString() ?? "")
-                
-        let titleDetails = HistoryDetails(historyDetailsType: .title, historyDetailsViewModel: titleVM)
-        
-        let contentDetails = HistoryDetails(historyDetailsType: .content, historyDetailsViewModel: contentVM)
-        
-        let createdAtDetails = HistoryDetails(historyDetailsType: .createdAt, historyDetailsViewModel: createdAtVM)
-       
-        items.append(titleDetails)
-        items.append(contentDetails)
-        items.append(createdAtDetails)
+        NSLayoutConstraint.activate(stackViewConstraints)
+//        NSLayoutConstraint.activate(imageViewConstraints)
+//        NSLayoutConstraint.activate(detailsFormViewConstraints)
     }
     
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
-}
-
-extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-        
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 150
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailsTableViewCell.identifier, for: indexPath) as? HistoryDetailsTableViewCell else {
-            return UITableViewCell()
+    private func configureUI() {
+        if let history {
+            imageView.image = history.image
         }
-        let item = items[indexPath.row]
-        cell.configure(with: item.historyDetailsViewModel)
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HistoryDetailsHeaderView.identifier) as? HistoryDetailsHeaderView else {
-            return UITableViewHeaderFooterView()
-        }
-        
-        headerView.configure(with: HistoryDetailsHeaderViewViewModel(image: history?.image ?? nil))
-        
-        return headerView
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let row = indexPath.row
-
-        let item = items[indexPath.row]
+    private func configureForms() {
+//        detailsFormView.configure(with:
+//            HistoryDetailsFormViewViewModel(title: "제목", value: "값")
+//        )
+    }
+    
+    private func toDetailVC() {
         let vc = HistoryDetailsEditViewController()
-        vc.history = history
-        
-        switch row {
-        case 0:
-            vc.historyDetailsType = .title
-            break
-        case 1:
-            vc.historyDetailsType = .content
-            break
-        case 2:
-            return
-        default:
-            return
-        }
-        
-        vc.navigationItem.title = item.historyDetailsViewModel.title
+        vc.navigationItem.title = "123"
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension HistoryDetailsViewController: HistoryDetailsEditViewControllerDelegate {
-    func didTapEditButton(newHistory: History?, type: HistoryDetailsType?) {
-        if let newHistory {
-            switch type {
-            case .title:
-                HistoryManager.shared.updateTitle(id: newHistory.id, title: newHistory.title)
-            case .content:
-                HistoryManager.shared.updateContent(id: newHistory.id, content: newHistory.content)
-            case .createdAt:
-                return
-            default:
-                return
-            }
-        }
     }
 }

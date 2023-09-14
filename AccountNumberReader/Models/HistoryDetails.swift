@@ -8,6 +8,5 @@
 import Foundation
 
 struct HistoryDetails {
-    var historyDetailsType: HistoryDetailsType
     var historyDetailsViewModel: HistoryDetailsTableViewCellViewModel
 }
