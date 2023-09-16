@@ -1,9 +1,16 @@
 
 import UIKit
 
+protocol HistoryDetailsEditViewControllerDelegate {
+    func didTapEditButton(historyDetailsType: HistoryDetailsType, value: String)
+}
+
 class HistoryDetailsEditViewController: UIViewController {
     
+    var delegate: HistoryDetailsEditViewControllerDelegate?
+    
     var history: History?
+    var historyDetailsType: HistoryDetailsType?
     
     private let textField: UITextField = {
         let tf = UITextField()
@@ -30,9 +37,24 @@ class HistoryDetailsEditViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(textField)
         view.addSubview(editButton)
-//        textField.text = value
         editButton.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
         applyConstraints()
+        configureTextField()
+    }
+    
+    private func configureTextField() {
+        if let history {
+            switch historyDetailsType {
+            case .title:
+                textField.text = history.title
+            case .content:
+                textField.text = history.content
+            case .createdAt:
+                textField.text = history.createdAt.toString()
+            default:
+                return
+            }
+        }
     }
     
     private func applyConstraints() {
@@ -61,7 +83,9 @@ class HistoryDetailsEditViewController: UIViewController {
     @objc private func didTapEditButton() {
         print("HistoryDetailsEditViewController didTapEditButton")
         let text = textField.text ?? ""
-        print("text = \(text)")
-        navigationController?.popViewController(animated: true)
+        if let historyDetailsType {
+            delegate?.didTapEditButton(historyDetailsType: historyDetailsType, value: text)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }

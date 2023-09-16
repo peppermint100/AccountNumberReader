@@ -58,7 +58,6 @@ class HistoryViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureSearchController()
         configureTableView()
-        getHistories()
         
         // MARK: 개발용 임시 코드
         addHistoryTempButton.addTarget(self, action: #selector(addHistory), for: .touchUpInside)
@@ -67,6 +66,11 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         tableView.frame = view.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getHistories()
     }
     
     private func getHistories() {

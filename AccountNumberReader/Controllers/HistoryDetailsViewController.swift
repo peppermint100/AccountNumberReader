@@ -22,18 +22,21 @@ class HistoryDetailsViewController: UIViewController {
     
     private let titleFormView: HistoryDetailsFormView = {
         let view = HistoryDetailsFormView()
+        view.historyDetailsType = .title
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let contentFormView: HistoryDetailsFormView = {
         let view = HistoryDetailsFormView()
+        view.historyDetailsType = .content
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let createdAtFormView: HistoryDetailsFormView = {
         let view = HistoryDetailsFormView()
+        view.historyDetailsType = .createdAt
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,7 +51,8 @@ class HistoryDetailsViewController: UIViewController {
         formStackView.addArrangedSubview(createdAtFormView)
         applyConstraints()
         configureUI()
-        configureForms()
+        configureDelegate()
+        updateForms(history: history)
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,10 +89,18 @@ class HistoryDetailsViewController: UIViewController {
         }
     }
     
-    private func configureForms() {
-        titleFormView.configure(with:HistoryDetailsFormViewViewModel(title: "제목", value: "값"))
-        contentFormView.configure(with:HistoryDetailsFormViewViewModel(title: "내용", value: "01-123-134124 국민"))
-        createdAtFormView.configure(with:HistoryDetailsFormViewViewModel(title: "날짜", value: "2023-09-13"))
+    private func configureDelegate() {
+        titleFormView.delegate = self
+        contentFormView.delegate = self
+        createdAtFormView.delegate = self
+    }
+    
+    private func updateForms(history: History?) {
+        if let history {
+            titleFormView.configure(with:HistoryDetailsFormViewViewModel(title: "제목", value: history.title))
+            contentFormView.configure(with:HistoryDetailsFormViewViewModel(title: "내용", value: history.content))
+            createdAtFormView.configure(with:HistoryDetailsFormViewViewModel(title: "날짜", value: history.createdAt.toString()))
+        }
     }
     
     private func toDetailVC() {
@@ -96,6 +108,40 @@ class HistoryDetailsViewController: UIViewController {
         vc.navigationItem.title = "123"
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HistoryDetailsViewController: HistoryDetailsFormViewDelegate, HistoryDetailsEditViewControllerDelegate {
+    func didTapEditButton(historyDetailsType: HistoryDetailsType, value: String) {
+        print("HistoryDetailsViewController didTapEditButton history = \(history)")
+        print("value = ", value)
+        if var history {
+            switch historyDetailsType {
+            case .title:
+                history.title = value
+                HistoryManager.shared.updateTitle(id: history.id, title: value)
+            case .content:
+                history.content = value
+                HistoryManager.shared.updateContent(id: history.id, content: value)
+            case .createdAt:
+                return
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.updateForms(history: history)
+            }
+        }
+    }
+    
+    func moveToDetailsEditViewController(historyDetailsType: HistoryDetailsType) {
+        print("HistoryDetailsViewController moveToDetailsEditViewController")
+        let vc = HistoryDetailsEditViewController()
+        vc.history = history
+        vc.historyDetailsType = historyDetailsType
+        vc.delegate = self
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = historyDetailsType.rawValue
         navigationController?.pushViewController(vc, animated: true)
     }
 }

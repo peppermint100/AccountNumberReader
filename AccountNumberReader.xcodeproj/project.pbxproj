@@ -19,6 +19,7 @@
 		BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */; };
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
+		BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */; };
 		E501059F2AB283B200151AF9 /* HistoryDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */; };
 		E50105A12AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50105A02AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift */; };
 		E52031032AA703E2007540AB /* HistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */; };
@@ -57,6 +58,7 @@
 		BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchResultsViewController.swift; sourceTree = "<group>"; };
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
+		BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsType.swift; sourceTree = "<group>"; };
 		E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsFormView.swift; sourceTree = "<group>"; };
 		E50105A02AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsFormViewViewModel.swift; sourceTree = "<group>"; };
 		E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				E5C910292A9DD433000AC5CA /* HistoryManager.swift */,
 				E5BA17332AA07C1D00A43205 /* History.swift */,
 				E5C82E662AB0311400465142 /* HistoryDetails.swift */,
+				BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				E5C82E672AB0311400465142 /* HistoryDetails.swift in Sources */,
+				BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */,
 				E5C910242A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,

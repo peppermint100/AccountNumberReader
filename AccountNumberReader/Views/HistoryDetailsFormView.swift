@@ -7,7 +7,22 @@
 
 import UIKit
 
+protocol HistoryDetailsFormViewDelegate: AnyObject {
+    func moveToDetailsEditViewController(historyDetailsType: HistoryDetailsType)
+}
+
 class HistoryDetailsFormView: UIView {
+    
+    var historyDetailsType: HistoryDetailsType?
+    var delegate: HistoryDetailsFormViewDelegate?
+    
+    private let stackView: UIStackView = {
+        let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .horizontal
+        sv.distribution = .fillEqually
+        return sv
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -20,16 +35,19 @@ class HistoryDetailsFormView: UIView {
         let label = UILabel()
         label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .right
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(titleLabel)
-        addSubview(valueLabel)
+        addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(valueLabel)
         applyConstraints()
+        configureTapGesture()
     }
     
     override func layoutSubviews() {
@@ -40,14 +58,23 @@ class HistoryDetailsFormView: UIView {
         fatalError()
     }
     
+    private func configureTapGesture() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func onTap() {
+        if let historyDetailsType {
+            delegate?.moveToDetailsEditViewController(historyDetailsType: historyDetailsType)
+        }
+    }
+    
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            valueLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
         ])
     }
     
