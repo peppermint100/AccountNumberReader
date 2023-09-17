@@ -38,7 +38,7 @@ class HistoryTableViewCell: UITableViewCell {
         let button = UIButton()
         let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
         let buttonImage = UIImage(
-            systemName: "chevron.compact.right",
+            systemName: "pin",
             withConfiguration: imageConfiguration)
         button.setImage(buttonImage, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -128,5 +128,6 @@ class HistoryTableViewCell: UITableViewCell {
         scannedTextLabel.text = history.content
         scannedImageView.image = history.image
         createdAtLabel.text = history.createdAt.toString()
+        historyDetailsButton.isHidden = !history.isPinned
     }
 }

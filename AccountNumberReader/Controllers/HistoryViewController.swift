@@ -141,6 +141,23 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var history = histories[indexPath.row]
+        let pinAction = UIContextualAction(style: .normal, title: "고정") { (action, view, completionHandler) in
+            HistoryManager.shared.togglePin(id: history.id) {
+                history.isPinned.toggle()
+            }
+            completionHandler(true)
+        }
+        
+        pinAction.backgroundColor = .systemOrange
+        pinAction.image = UIImage(systemName: "pin")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [pinAction])
+        swipeConfiguration.performsFirstActionWithFullSwipe = true
+        return swipeConfiguration
+    }
 }
 
 // MARK: SearchBarExtensions
