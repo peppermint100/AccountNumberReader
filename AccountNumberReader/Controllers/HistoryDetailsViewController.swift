@@ -84,6 +84,7 @@ class HistoryDetailsViewController: UIViewController {
         
         applyConstraints()
         configureUI()
+        configureSwipeGesture()
         configureDelegate()
         configureButtons()
         updateForms(history: history)
@@ -156,7 +157,20 @@ class HistoryDetailsViewController: UIViewController {
         }
     }
     
+    private func configureSwipeGesture() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
+        swipeGesture.direction = .right
+        view.addGestureRecognizer(swipeGesture)
+    }
+    
     @objc private func copyContentToClipboard() {
+        if let history {
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = history.content
+            copyButton.setTitle("복사완료", for: .normal)
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        }
     }
     
     private func updateForms(history: History?) {
