@@ -134,6 +134,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let history = histories[indexPath.row]
         let vc = HistoryDetailsViewController()
+        vc.navigationItem.title = history.title
         vc.history = history
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         vc.navigationItem.largeTitleDisplayMode = .never
