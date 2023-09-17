@@ -85,6 +85,8 @@ class HistoryViewController: UIViewController {
     private func configureSearchController() {
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
+        searchController.searchBar.becomeFirstResponder()
+        searchController.hidesNavigationBarDuringPresentation = false
     }
     
     private func configureTableView() {

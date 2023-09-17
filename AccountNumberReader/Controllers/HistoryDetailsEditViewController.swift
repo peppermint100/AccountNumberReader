@@ -19,6 +19,7 @@ class HistoryDetailsEditViewController: UIViewController {
         tf.textAlignment = .center
         tf.backgroundColor = .systemGray5
         tf.autocorrectionType = .no
+        tf.clearButtonMode = .whileEditing
         return tf
     }()
     
