@@ -125,6 +125,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let history = histories[indexPath.row]
+        cell.selectionStyle = .none
         cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: history))
         
         return cell
