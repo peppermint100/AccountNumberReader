@@ -36,12 +36,12 @@ class HistoryTableViewCell: UITableViewCell {
     
     let historyDetailsButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
         let buttonImage = UIImage(
             systemName: "pin",
             withConfiguration: imageConfiguration)
         button.setImage(buttonImage, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
        
@@ -122,12 +122,22 @@ class HistoryTableViewCell: UITableViewCell {
         fatalError()
     }
     
+    func updatePinUI(isPinned: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if (isPinned) {
+                self?.historyDetailsButton.alpha = 1
+            } else {
+                self?.historyDetailsButton.alpha = 0
+            }
+        }
+    }
+    
     func configure(with viewModel: HistorySearchResultsTableViewCellViewModel) {
         let history = viewModel.history
         titleLabel.text = history.title
         scannedTextLabel.text = history.content
         scannedImageView.image = history.image
         createdAtLabel.text = history.createdAt.toString()
-        historyDetailsButton.isHidden = !history.isPinned
+        updatePinUI(isPinned: viewModel.history.isPinned)
     }
 }
