@@ -10,6 +10,7 @@ import UIKit
 class HistoryViewController: UIViewController {
     
     var histories: [History] = []
+    var historyViewModels: [HistoryTableViewCellViewModel] = []
     
     var timerForDebounce: Timer?
     
@@ -76,6 +77,11 @@ class HistoryViewController: UIViewController {
     private func getHistories() {
         let historiesFetched = HistoryManager.shared.getHistories()
         histories = historiesFetched
+        historyViewModels = histories.map({ history in
+            return HistoryTableViewCellViewModel(
+            id: history.id, title: Observable(history.title), content: Observable(history.content),
+            image: history.image, createdAt: history.createdAt, isPinned: Observable(history.isPinned))
+        })
          
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
@@ -98,6 +104,10 @@ class HistoryViewController: UIViewController {
     
     private func getHistoriesWithQuery(_ query: String) -> [History] {
         return HistoryManager.shared.searchHistory(query)
+    }
+    
+    private func configureTableViewCellViewModel() {
+
     }
     
     @objc private func goBack() {
@@ -124,9 +134,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let history = histories[indexPath.row]
+        let viewModel = historyViewModels[indexPath.row]
         cell.selectionStyle = .none
-        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: history))
+        cell.configure(with: viewModel)
         
         return cell
     }
@@ -144,9 +154,12 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var history = histories[indexPath.row]
+        let historyViewModel = historyViewModels[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "고정") { (action, view, completionHandler) in
-            HistoryManager.shared.togglePin(id: history.id) {
+            HistoryManager.shared.togglePin(id: history.id) { newValue in
+                print("HistoryViewController isPinned = \(newValue)")
                 history.isPinned.toggle()
+                historyViewModel.isPinned.value = newValue
             }
             completionHandler(true)
         }

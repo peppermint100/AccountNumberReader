@@ -56,7 +56,7 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
         
         let history = histories[indexPath.row]
         
-        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: history))
+//        cell.configure(with: HistorySearchResultsTableViewCellViewModel(history: history))
         
         return cell
     }

@@ -176,7 +176,7 @@ final class HistoryManager {
         completion()
     }
     
-    func togglePin(id: UUID, completion: @escaping () -> Void) {
+    func togglePin(id: UUID, completion: @escaping (_ newValue: Bool) -> Void) {
         let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
         let equalId = NSPredicate(format: "id == %@", id.uuidString)
         
@@ -189,17 +189,20 @@ final class HistoryManager {
                 }
                 
                 if !histories.isEmpty {
-                    histories.first?.isPinned.toggle()
+                    if let history = histories.first {
+                        history.isPinned.toggle()
+                        completion(history.isPinned)
+                    }
                 }
                 
                 if context.hasChanges{
                     try context.save()
                 }
+                
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-        completion()
     }
 }

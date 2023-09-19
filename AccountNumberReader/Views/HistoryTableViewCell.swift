@@ -9,6 +9,8 @@ import UIKit
 
 class HistoryTableViewCell: UITableViewCell {
     
+    var viewModel: HistoryTableViewCellViewModel?
+    
     static let identifier = "HistorySearchResultsTableViewCell"
     
     let stackView: UIStackView = {
@@ -122,22 +124,35 @@ class HistoryTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    func updatePinUI(isPinned: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            if (isPinned) {
-                self?.historyDetailsButton.alpha = 1
-            } else {
-                self?.historyDetailsButton.alpha = 0
+    func configure(with viewModel: HistoryTableViewCellViewModel) {
+        titleLabel.text = viewModel.title.value
+        scannedTextLabel.text = viewModel.content.value
+        scannedImageView.image = viewModel.image
+        createdAtLabel.text = viewModel.createdAt.toString()
+        
+        self.viewModel?.title.subscribe { value in
+            DispatchQueue.main.async { [weak self] in
+                print(value)
+                self?.titleLabel.text = value
             }
         }
-    }
-    
-    func configure(with viewModel: HistorySearchResultsTableViewCellViewModel) {
-        let history = viewModel.history
-        titleLabel.text = history.title
-        scannedTextLabel.text = history.content
-        scannedImageView.image = history.image
-        createdAtLabel.text = history.createdAt.toString()
-        updatePinUI(isPinned: viewModel.history.isPinned)
+        
+        self.viewModel?.content.subscribe { value in
+            DispatchQueue.main.async { [weak self] in
+                print(value)
+                self?.scannedTextLabel.text = value
+            }
+        }
+        
+        self.viewModel?.isPinned.subscribe { isPinned in
+            DispatchQueue.main.async { [weak self] in
+                print("HistoryTableViewCell \(isPinned)")
+                if (isPinned) {
+                    self?.historyDetailsButton.alpha = 1
+                } else {
+                    self?.historyDetailsButton.alpha = 0
+                }
+            }
+        }
     }
 }
