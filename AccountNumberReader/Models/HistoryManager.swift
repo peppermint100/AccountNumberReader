@@ -21,8 +21,9 @@ final class HistoryManager {
     func getHistories() -> [History] {
         var result: [History] = []
         let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+        let isPinnedFirst = NSSortDescriptor(key: "isPinned", ascending: false)
         let createdAtDesc = NSSortDescriptor(key: "createdAt", ascending: false)
-        request.sortDescriptors = [createdAtDesc]
+        request.sortDescriptors = [isPinnedFirst, createdAtDesc]
         
         do {
             guard let histories = try context?.fetch(request) as? [HistoryMO] else {

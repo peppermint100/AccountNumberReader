@@ -133,7 +133,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let viewModel = historyViewModels[indexPath.row]
         cell.selectionStyle = .none
         
-        
         viewModel.isPinned.subscribe { _ in
             cell.updateUI(viewModel: viewModel)
         }
@@ -155,10 +154,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        var history = histories[indexPath.row]
         let historyViewModel = historyViewModels[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "고정") { (action, view, completionHandler) in
-            HistoryManager.shared.togglePin(id: history.id) { newValue in
+            HistoryManager.shared.togglePin(id: historyViewModel.id) { newValue in
                 historyViewModel.isPinned.value = newValue
             }
             completionHandler(true)
