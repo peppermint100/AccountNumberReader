@@ -82,7 +82,7 @@ class HistoryViewController: UIViewController {
             id: history.id, title: Observable(history.title), content: Observable(history.content),
             image: history.image, createdAt: history.createdAt, isPinned: Observable(history.isPinned))
         })
-         
+        
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
@@ -105,11 +105,7 @@ class HistoryViewController: UIViewController {
     private func getHistoriesWithQuery(_ query: String) -> [History] {
         return HistoryManager.shared.searchHistory(query)
     }
-    
-    private func configureTableViewCellViewModel() {
 
-    }
-    
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -136,6 +132,12 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         let viewModel = historyViewModels[indexPath.row]
         cell.selectionStyle = .none
+        
+        
+        viewModel.isPinned.subscribe { _ in
+            cell.updateUI(viewModel: viewModel)
+        }
+        
         cell.configure(with: viewModel)
         
         return cell
@@ -157,16 +159,15 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let historyViewModel = historyViewModels[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "고정") { (action, view, completionHandler) in
             HistoryManager.shared.togglePin(id: history.id) { newValue in
-                print("HistoryViewController isPinned = \(newValue)")
-                history.isPinned.toggle()
                 historyViewModel.isPinned.value = newValue
             }
             completionHandler(true)
         }
         
-        pinAction.backgroundColor = .systemOrange
-        pinAction.image = UIImage(systemName: "pin")
+        let pinImageConfiguration = UIImage.SymbolConfiguration(pointSize: 15)
         
+        pinAction.backgroundColor = .systemOrange
+        pinAction.image = UIImage(systemName: "pin.fill", withConfiguration: pinImageConfiguration)
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [pinAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = true
         return swipeConfiguration

@@ -36,14 +36,13 @@ class HistoryTableViewCell: UITableViewCell {
         return sv
     }()
     
-    let historyDetailsButton: UIButton = {
+    let pinButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
-        let buttonImage = UIImage(
-            systemName: "pin",
-            withConfiguration: imageConfiguration)
+        let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
+        var buttonImage = UIImage(systemName: "pin.fill", withConfiguration: imageConfiguration)
         button.setImage(buttonImage, for: .normal)
+        button.tintColor = .secondaryLabel
         return button
     }()
        
@@ -80,7 +79,7 @@ class HistoryTableViewCell: UITableViewCell {
         addSubview(stackView)
         stackView.addArrangedSubview(scannedImageView)
         stackView.addArrangedSubview(historyDetailsView)
-        stackView.addArrangedSubview(historyDetailsButton)
+        stackView.addArrangedSubview(pinButton)
         historyDetailsView.addArrangedSubview(titleLabel)
         historyDetailsView.addArrangedSubview(scannedTextLabel)
         historyDetailsView.addArrangedSubview(createdAtLabel)
@@ -100,7 +99,7 @@ class HistoryTableViewCell: UITableViewCell {
             historyDetailsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55)
         ]
         let historyDetailsButtonConstraints = [
-            historyDetailsButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1)
+            pinButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1)
         ]
         let titleLabelConstraints = [
             titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
@@ -124,35 +123,25 @@ class HistoryTableViewCell: UITableViewCell {
         fatalError()
     }
     
+    private func drawPin(isPinned: Bool) {
+        if (isPinned) {
+            pinButton.alpha = 1
+        } else {
+            pinButton.alpha = 0
+        }
+    }
+    
+    func updateUI(viewModel: HistoryTableViewCellViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.drawPin(isPinned: viewModel.isPinned.value)
+        }
+    }
+    
     func configure(with viewModel: HistoryTableViewCellViewModel) {
         titleLabel.text = viewModel.title.value
         scannedTextLabel.text = viewModel.content.value
         scannedImageView.image = viewModel.image
         createdAtLabel.text = viewModel.createdAt.toString()
-        
-        self.viewModel?.title.subscribe { value in
-            DispatchQueue.main.async { [weak self] in
-                print(value)
-                self?.titleLabel.text = value
-            }
-        }
-        
-        self.viewModel?.content.subscribe { value in
-            DispatchQueue.main.async { [weak self] in
-                print(value)
-                self?.scannedTextLabel.text = value
-            }
-        }
-        
-        self.viewModel?.isPinned.subscribe { isPinned in
-            DispatchQueue.main.async { [weak self] in
-                print("HistoryTableViewCell \(isPinned)")
-                if (isPinned) {
-                    self?.historyDetailsButton.alpha = 1
-                } else {
-                    self?.historyDetailsButton.alpha = 0
-                }
-            }
-        }
+        drawPin(isPinned: viewModel.isPinned.value)
     }
 }
