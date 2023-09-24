@@ -118,7 +118,6 @@ class HistoryDetailsViewController: UIViewController {
     }
     
     @objc private func goBack() {
-        print("goback")
         navigationController?.popViewController(animated: true)
     }
     
@@ -210,7 +209,6 @@ extension HistoryDetailsViewController: HistoryDetailsFormViewDelegate, HistoryD
     }
     
     func moveToDetailsEditViewController(historyDetailsType: HistoryDetailsType) {
-        print("HistoryDetailsViewController moveToDetailsEditViewController")
         if historyDetailsType == .createdAt {
             return
         }
