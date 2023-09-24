@@ -102,10 +102,8 @@ final class HistoryManager {
         if let context {
             do {
                 let history = try context.fetch(request) as? [HistoryMO]
-                print("history = ", history)
                 history?.first?.title = title
                 if (context.hasChanges) {
-                    print("history context hasChanges")
                     try context.save()
                 }
             } catch {

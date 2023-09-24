@@ -50,7 +50,6 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: SettingTableViewCellViewModel) {
-        let settingElement = viewModel.settingElement
         let option = viewModel.settingValue
         switch viewModel.settingElement {
         case .copyScope(let selected):
