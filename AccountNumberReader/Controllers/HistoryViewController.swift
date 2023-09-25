@@ -131,7 +131,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let viewModel = historyViewModels[indexPath.row]
+        
+        cell.indexPath = indexPath
+        cell.delegate = self
         cell.selectionStyle = .none
+        cell.viewModel = viewModel
         
         viewModel.isPinned.subscribe { _ in
             cell.updateUI(viewModel: viewModel)
@@ -192,6 +196,17 @@ extension HistoryViewController: UISearchResultsUpdating {
             
             let historySearched = self?.getHistoriesWithQuery(query)
             searchResultController.update(with: historySearched ?? [])
+        }
+    }
+}
+
+// MARK: HistoryTableViewCellDelegate
+extension HistoryViewController: HistoryTableViewCellDelegate {
+    func removePin(historyId: UUID, at: IndexPath) {
+        print("delegate button tapped")
+        let viewModel = historyViewModels[at.row]
+        HistoryManager.shared.togglePin(id: historyId) { newValue in
+            viewModel.isPinned.value = false
         }
     }
 }

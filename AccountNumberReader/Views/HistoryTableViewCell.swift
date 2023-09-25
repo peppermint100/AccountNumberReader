@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol HistoryTableViewCellDelegate {
+    func removePin(historyId: UUID, at: IndexPath)
+}
+
 class HistoryTableViewCell: UITableViewCell {
     
+    var delegate: HistoryTableViewCellDelegate?
+    
     var viewModel: HistoryTableViewCellViewModel?
+    var indexPath: IndexPath?
     
     static let identifier = "HistorySearchResultsTableViewCell"
     
@@ -83,7 +90,15 @@ class HistoryTableViewCell: UITableViewCell {
         historyDetailsView.addArrangedSubview(titleLabel)
         historyDetailsView.addArrangedSubview(scannedTextLabel)
         historyDetailsView.addArrangedSubview(createdAtLabel)
+        pinButton.addTarget(self, action: #selector(removePin), for: .touchUpInside)
         applyConstraints()
+    }
+    
+    @objc private func removePin() {
+        print("removePin called")
+        if let viewModel = viewModel, let indexPath = indexPath {
+            delegate?.removePin(historyId: viewModel.id, at: indexPath)
+        }
     }
     
     override func layoutSubviews() {
@@ -93,13 +108,13 @@ class HistoryTableViewCell: UITableViewCell {
     
     private func applyConstraints() {
         let scannedImageViewConstraints = [
-            scannedImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35)
+            scannedImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.32)
         ]
         let historyDetailsViewConstraints = [
-            historyDetailsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55)
+            historyDetailsView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.52)
         ]
-        let historyDetailsButtonConstraints = [
-            pinButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1)
+        let pinButtonConstraints = [
+            pinButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.16)
         ]
         let titleLabelConstraints = [
             titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
@@ -113,7 +128,7 @@ class HistoryTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate(scannedImageViewConstraints)
         NSLayoutConstraint.activate(historyDetailsViewConstraints)
-        NSLayoutConstraint.activate(historyDetailsButtonConstraints)
+        NSLayoutConstraint.activate(pinButtonConstraints)
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(scannedTextLabelConstraints)
         NSLayoutConstraint.activate(createdAtLabelConstraints)
