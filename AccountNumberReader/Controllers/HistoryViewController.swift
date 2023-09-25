@@ -133,7 +133,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let viewModel = historyViewModels[indexPath.row]
         
         cell.indexPath = indexPath
-        cell.delegate = self
         cell.selectionStyle = .none
         cell.viewModel = viewModel
         
@@ -160,11 +159,18 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let historyViewModel = historyViewModels[indexPath.row]
         
+        let title: String
+        let backgroundColor: UIColor
+
         if historyViewModel.isPinned.value {
-            return nil
+            title = "고정해제"
+            backgroundColor = .systemRed
+        } else {
+            title = "고정"
+            backgroundColor = .systemOrange
         }
         
-        let pinAction = UIContextualAction(style: .normal, title: "고정") { (action, view, completionHandler) in
+        let pinAction = UIContextualAction(style: .normal, title: title) { (action, view, completionHandler) in
             HistoryManager.shared.togglePin(id: historyViewModel.id) { newValue in
                 historyViewModel.isPinned.value = newValue
             }
@@ -173,7 +179,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         let pinImageConfiguration = UIImage.SymbolConfiguration(pointSize: 15)
         
-        pinAction.backgroundColor = .systemOrange
+        pinAction.backgroundColor = backgroundColor
         pinAction.image = UIImage(systemName: "pin.fill", withConfiguration: pinImageConfiguration)
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [pinAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = true
@@ -196,17 +202,6 @@ extension HistoryViewController: UISearchResultsUpdating {
             
             let historySearched = self?.getHistoriesWithQuery(query)
             searchResultController.update(with: historySearched ?? [])
-        }
-    }
-}
-
-// MARK: HistoryTableViewCellDelegate
-extension HistoryViewController: HistoryTableViewCellDelegate {
-    func removePin(historyId: UUID, at: IndexPath) {
-        print("delegate button tapped")
-        let viewModel = historyViewModels[at.row]
-        HistoryManager.shared.togglePin(id: historyId) { newValue in
-            viewModel.isPinned.value = false
         }
     }
 }

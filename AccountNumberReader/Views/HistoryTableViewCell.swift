@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol HistoryTableViewCellDelegate {
-    func removePin(historyId: UUID, at: IndexPath)
-}
-
 class HistoryTableViewCell: UITableViewCell {
-    
-    var delegate: HistoryTableViewCellDelegate?
     
     var viewModel: HistoryTableViewCellViewModel?
     var indexPath: IndexPath?
@@ -90,17 +84,9 @@ class HistoryTableViewCell: UITableViewCell {
         historyDetailsView.addArrangedSubview(titleLabel)
         historyDetailsView.addArrangedSubview(scannedTextLabel)
         historyDetailsView.addArrangedSubview(createdAtLabel)
-        pinButton.addTarget(self, action: #selector(removePin), for: .touchUpInside)
         applyConstraints()
     }
-    
-    @objc private func removePin() {
-        print("removePin called")
-        if let viewModel = viewModel, let indexPath = indexPath {
-            delegate?.removePin(historyId: viewModel.id, at: indexPath)
-        }
-    }
-    
+   
     override func layoutSubviews() {
         super.layoutSubviews()
         stackView.frame = bounds
