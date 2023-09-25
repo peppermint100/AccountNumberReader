@@ -25,44 +25,11 @@ class HistoryViewController: UIViewController {
         return vc
     }()
     
-    // MARK: 개발용 임시 코드
-    let addHistoryTempButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("추가", for: .normal)
-        button.backgroundColor = .systemBlue
-        return button
-    }()
-    
-    @objc private func addHistory() {
-        let historySample = History(
-            id: UUID(),
-            title: "제목",
-            content: "이것저것이것저것이것저것이것저것이것저것이것저것이것저것fwaefjwaklefjwalefjklawefjawejkfajew",
-            image: UIImage(systemName: "square.and.arrow.up.trianglebadge.exclamationmark")!,
-            createdAt: Date(),
-            isPinned: false)
-        
-        HistoryManager.shared.addHistory(historySample) { [weak self] in
-            print("History 저장완료 hisory: \(historySample)")
-        }
-        
-        getHistories()
-    }
-    
-    private func configureAddHistoryTempButton() {
-        view.addSubview(addHistoryTempButton)
-        addHistoryTempButton.frame = CGRect(x: 200, y: 300, width: 100, height: 50)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureSearchController()
         configureTableView()
-        
-        // MARK: 개발용 임시 코드
-        addHistoryTempButton.addTarget(self, action: #selector(addHistory), for: .touchUpInside)
-        configureAddHistoryTempButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,7 +61,7 @@ class HistoryViewController: UIViewController {
         searchController.searchBar.becomeFirstResponder()
         searchController.hidesNavigationBarDuringPresentation = false
     }
-    
+
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
