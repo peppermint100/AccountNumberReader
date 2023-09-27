@@ -41,33 +41,6 @@ class HistoryDetailsViewController: UIViewController {
         return view
     }()
     
-    private let buttonStackView: UIStackView = {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.axis = .horizontal
-        sv.distribution = .fillEqually
-        sv.spacing = 20
-        return sv
-    }()
-    
-    private let copyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("복사하기", for: .normal)
-        button.backgroundColor = .systemGreen
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
-    
-    private let deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("삭제하기", for: .normal)
-        button.backgroundColor = .systemRed
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -78,15 +51,11 @@ class HistoryDetailsViewController: UIViewController {
         formStackView.addArrangedSubview(contentFormView)
         formStackView.addArrangedSubview(createdAtFormView)
         
-        view.addSubview(buttonStackView)
-        buttonStackView.addArrangedSubview(copyButton)
-        buttonStackView.addArrangedSubview(deleteButton)
-        
         applyConstraints()
         configureUI()
         configureSwipeGesture()
         configureDelegate()
-        configureButtons()
+        configureRightBarButtons()
         updateForms(history: history)
     }
     
@@ -105,16 +74,8 @@ class HistoryDetailsViewController: UIViewController {
             formStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15)
         ]
         
-        let buttonStackViewConstraints = [
-            buttonStackView.topAnchor.constraint(equalTo: formStackView.bottomAnchor, constant: 15),
-            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            buttonStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
-        ]
-
         NSLayoutConstraint.activate(imageViewConstraints)
         NSLayoutConstraint.activate(formStackViewConstraints)
-        NSLayoutConstraint.activate(buttonStackViewConstraints)
     }
     
     @objc private func goBack() {
@@ -133,9 +94,12 @@ class HistoryDetailsViewController: UIViewController {
         createdAtFormView.delegate = self
     }
     
-    private func configureButtons() {
-        copyButton.addTarget(self, action: #selector(copyContentToClipboard), for: .touchUpInside)
-        deleteButton.addTarget(self, action: #selector(deleteHistory), for: .touchUpInside)
+    private func configureRightBarButtons() {
+        let deleteButtonImage = UIImage(systemName: "trash")
+        let copyButtonImage = UIImage(systemName: "a.magnify")
+        let deleteButton = UIBarButtonItem(image: deleteButtonImage, style: .plain, target: self, action: #selector(deleteHistory))
+        let copyButton = UIBarButtonItem(image: copyButtonImage, style: .plain, target: self, action: #selector(copyContentToClipboard))
+        navigationItem.rightBarButtonItems = [deleteButton, copyButton]
     }
     
     @objc private func deleteHistory() {
@@ -166,7 +130,6 @@ class HistoryDetailsViewController: UIViewController {
         if let history {
             let pasteboard = UIPasteboard.general
             pasteboard.string = history.content
-            copyButton.setTitle("복사완료", for: .normal)
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
         }
