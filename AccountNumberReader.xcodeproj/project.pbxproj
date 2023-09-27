@@ -19,6 +19,7 @@
 		BA2810BD2AC4664500CEA4F3 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810BC2AC4664500CEA4F3 /* Bank.swift */; };
 		BA2810BF2AC4667C00CEA4F3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810BE2AC4667C00CEA4F3 /* Constants.swift */; };
 		BA2810C12AC466A400CEA4F3 /* AccountExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810C02AC466A400CEA4F3 /* AccountExtractor.swift */; };
+		BA2810C32AC46BFB00CEA4F3 /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */; };
 		BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */; };
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
@@ -62,6 +63,7 @@
 		BA2810BC2AC4664500CEA4F3 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		BA2810BE2AC4667C00CEA4F3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA2810C02AC466A400CEA4F3 /* AccountExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExtractor.swift; sourceTree = "<group>"; };
+		BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
 		BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchResultsViewController.swift; sourceTree = "<group>"; };
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				E5C82E662AB0311400465142 /* HistoryDetails.swift */,
 				BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */,
 				BA2810BC2AC4664500CEA4F3 /* Bank.swift */,
+				BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,
 				E50105A12AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift in Sources */,
 				E5ED45D12AA84526002A1F22 /* HistoryDetailsTableViewCell.swift in Sources */,
+				BA2810C32AC46BFB00CEA4F3 /* SettingManager.swift in Sources */,
 				E5ED45D32AA84577002A1F22 /* HistoryDetailsTableViewCellViewModel.swift in Sources */,
 				BA05E9862A94AEF300D31A7A /* HistoryViewController.swift in Sources */,
 				E5BA17362AA07CD600A43205 /* HistorySearchResultsTableViewCellViewModel.swift in Sources */,
