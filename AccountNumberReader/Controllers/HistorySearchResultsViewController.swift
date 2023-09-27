@@ -9,6 +9,7 @@ import UIKit
 
 class HistorySearchResultsViewController: UIViewController {
     var histories: [History] = []
+    var historyViewModels: [HistoryTableViewCellViewModel] = []
     
     let tableView: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
@@ -34,6 +35,17 @@ class HistorySearchResultsViewController: UIViewController {
     
     func update(with results: [History]) {
         histories = results
+        historyViewModels = histories.map({ history in
+            return HistoryTableViewCellViewModel(
+            id: history.id, title: Observable(history.title), content: Observable(history.content),
+            image: history.image, createdAt: history.createdAt, isPinned: Observable(history.isPinned))
+        })
+        
+        tableView.reloadData()
+    }
+    
+    private func removeHistory(at: IndexPath) {
+        historyViewModels.remove(at: at.row)
         tableView.reloadData()
     }
     
@@ -50,7 +62,7 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
     }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return histories.count
+        return historyViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,11 +73,7 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
             return UITableViewCell()
         }
         
-        let history = histories[indexPath.row]
-        let viewModel = HistoryTableViewCellViewModel(
-        id: history.id, title: Observable(history.title), content: Observable(history.content),
-        image: history.image, createdAt: history.createdAt, isPinned: Observable(history.isPinned))
-        
+        let viewModel = historyViewModels[indexPath.row]
         cell.indexPath = indexPath
         cell.selectionStyle = .none
         cell.viewModel = viewModel
@@ -91,34 +99,23 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let history = histories[indexPath.row]
-        let historyViewModel = HistoryTableViewCellViewModel(
-        id: history.id, title: Observable(history.title), content: Observable(history.content),
-        image: history.image, createdAt: history.createdAt, isPinned: Observable(history.isPinned))
+        let historyViewModel = historyViewModels[indexPath.row]
         
-        let title: String
-        let backgroundColor: UIColor
-
-        if historyViewModel.isPinned.value {
-            title = "고정해제"
-            backgroundColor = .systemRed
-        } else {
-            title = "고정"
-            backgroundColor = .systemOrange
-        }
-        
-        let pinAction = UIContextualAction(style: .normal, title: title) { (action, view, completionHandler) in
+        let pinAction = UIContextualAction(style: .normal, title: historyViewModel.isPinned.value ? "고정해제" : "고정") { (action, view, completionHandler) in
             HistoryManager.shared.togglePin(id: historyViewModel.id) { newValue in
                 historyViewModel.isPinned.value = newValue
             }
             completionHandler(true)
         }
         
-        let pinImageConfiguration = UIImage.SymbolConfiguration(pointSize: 15)
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, completionHandler) in
+            HistoryManager.shared.deleteHistory(id: historyViewModel.id) { [weak self] in
+                self?.removeHistory(at: indexPath)
+            }
+            completionHandler(true)
+        }
         
-        pinAction.backgroundColor = backgroundColor
-        pinAction.image = UIImage(systemName: "pin.fill", withConfiguration: pinImageConfiguration)
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [pinAction])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, pinAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = true
         return swipeConfiguration
     }
