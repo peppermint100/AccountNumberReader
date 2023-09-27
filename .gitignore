@@ -117,3 +117,5 @@ $RECYCLE.BIN/
 .metadata/
 .svn/
 
+*.xcuserstate
+
