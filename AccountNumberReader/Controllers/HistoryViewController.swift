@@ -126,36 +126,28 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let historyViewModel = historyViewModels[indexPath.row]
         
-        let title: String
-        let backgroundColor: UIColor
-
-        if historyViewModel.isPinned.value {
-            title = "고정해제"
-            backgroundColor = .systemRed
-        } else {
-            title = "고정"
-            backgroundColor = .systemOrange
-        }
-        
-        let pinAction = UIContextualAction(style: .normal, title: title) { (action, view, completionHandler) in
+        let pinAction = UIContextualAction(style: .normal, title: historyViewModel.isPinned.value ? "고정해제" : "고정") { (action, view, completionHandler) in
             HistoryManager.shared.togglePin(id: historyViewModel.id) { newValue in
                 historyViewModel.isPinned.value = newValue
             }
             completionHandler(true)
         }
         
-        let pinImageConfiguration = UIImage.SymbolConfiguration(pointSize: 15)
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, completionHandler) in
+            HistoryManager.shared.deleteHistory(id: historyViewModel.id) { [weak self] in
+                self?.getHistories()
+            }
+            completionHandler(true)
+        }
         
-        pinAction.backgroundColor = backgroundColor
-        pinAction.image = UIImage(systemName: "pin.fill", withConfiguration: pinImageConfiguration)
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [pinAction])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, pinAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = true
         return swipeConfiguration
     }
 }
 
 // MARK: SearchBarExtensions
-extension HistoryViewController: UISearchResultsUpdating {
+extension HistoryViewController: UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         timerForDebounce?.invalidate()
         timerForDebounce = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { [weak self] _ in
@@ -170,5 +162,13 @@ extension HistoryViewController: UISearchResultsUpdating {
             let historySearched = self?.getHistoriesWithQuery(query)
             searchResultController.update(with: historySearched ?? [])
         }
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        getHistories()
+     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        getHistories()
     }
 }
