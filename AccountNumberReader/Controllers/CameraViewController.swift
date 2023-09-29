@@ -13,8 +13,33 @@ class CameraViewController: UIViewController {
     var session: AVCaptureSession?
     let output = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
+    
+    private let stackView: UIStackView = {
+        let sv = UIStackView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.backgroundColor = .green
+        sv.distribution = .fillProportionally
+        return sv
+    }()
+    
+    private let featureView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .red
+        return view
+    }()
+
+    private let cameraView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
+    }()
+    
     private let shutterButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 50
         button.layer.borderWidth = 10
         button.layer.borderColor = UIColor.white.cgColor
@@ -23,17 +48,50 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
-        view.layer.addSublayer(previewLayer)
-        view.addSubview(shutterButton)
+        print("viewdidload")
+        view.backgroundColor = .systemBackground
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(cameraView)
+        stackView.addArrangedSubview(featureView)
+        featureView.addSubview(shutterButton)
         shutterButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
+        applyConstraints()
         checkCameraPermissions()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        previewLayer.frame = view.bounds
-        shutterButton.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height - 100)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        previewLayer.frame = cameraView.bounds
+        cameraView.layer.addSublayer(previewLayer)
+    }
+    
+    private func applyConstraints() {
+        let stackViewConstraints = [
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        
+        let cameraViewConstraints = [
+            cameraView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.8)
+        ]
+        
+        let featureViewConstraints = [
+            featureView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.2)
+        ]
+        
+        let shutterButtonConstraints = [
+            shutterButton.centerXAnchor.constraint(equalTo: featureView.centerXAnchor),
+            shutterButton.centerYAnchor.constraint(equalTo: featureView.centerYAnchor),
+            shutterButton.widthAnchor.constraint(equalToConstant: 100),
+            shutterButton.heightAnchor.constraint(equalToConstant: 100),
+        ]
+        
+        NSLayoutConstraint.activate(stackViewConstraints)
+        NSLayoutConstraint.activate(cameraViewConstraints)
+        NSLayoutConstraint.activate(featureViewConstraints)
+        NSLayoutConstraint.activate(shutterButtonConstraints)
     }
     
     @objc private func didTapTakePhoto() {
@@ -79,7 +137,10 @@ class CameraViewController: UIViewController {
                 previewLayer.videoGravity = .resizeAspectFill
                 previewLayer.session = session
                 
-                session.startRunning()
+                DispatchQueue.global(qos: .background).async {
+                    session.startRunning()
+                }
+                
                 self.session = session
             } catch {
                 print(error.localizedDescription)
@@ -99,8 +160,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         let image = UIImage(data: data)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame = view.bounds
+        imageView.frame = cameraView.bounds
+        cameraView.layer.addSublayer(previewLayer)
         view.addSubview(imageView)
-        
     }
 }
