@@ -24,6 +24,7 @@
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
 		BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */; };
+		BAD9401A2ACA3FAF0073466C /* CameraStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD940192ACA3FAF0073466C /* CameraStatus.swift */; };
 		BAF2BFE82AB9AA59000605EB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2BFE72AB9AA59000605EB /* Observable.swift */; };
 		BAF2BFEA2AB9AB4E000605EB /* HistoryTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF2BFE92AB9AB4E000605EB /* HistoryTableViewCellViewModel.swift */; };
 		E501059F2AB283B200151AF9 /* HistoryDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */; };
@@ -68,6 +69,7 @@
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsType.swift; sourceTree = "<group>"; };
+		BAD940192ACA3FAF0073466C /* CameraStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraStatus.swift; sourceTree = "<group>"; };
 		BAF2BFE72AB9AA59000605EB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		BAF2BFE92AB9AB4E000605EB /* HistoryTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		E501059E2AB283B200151AF9 /* HistoryDetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsFormView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				BA8187C02AB5A499005C4605 /* HistoryDetailsType.swift */,
 				BA2810BC2AC4664500CEA4F3 /* Bank.swift */,
 				BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */,
+				BAD940192ACA3FAF0073466C /* CameraStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */,
 				E5C910242A9DD15B000AC5CA /* CameraAppCoreData.xcdatamodeld in Sources */,
 				BA2810BD2AC4664500CEA4F3 /* Bank.swift in Sources */,
+				BAD9401A2ACA3FAF0073466C /* CameraStatus.swift in Sources */,
 				BA05E9842A94AEEC00D31A7A /* CameraViewController.swift in Sources */,
 				BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */,
 				E50105A12AB28AB700151AF9 /* HistoryDetailsFormViewViewModel.swift in Sources */,
