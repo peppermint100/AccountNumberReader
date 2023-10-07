@@ -13,6 +13,7 @@ class CameraViewController: UIViewController {
     var session: AVCaptureSession?
     var output = AVCapturePhotoOutput()
     var previewLayer = AVCaptureVideoPreviewLayer()
+    var cameraStatus: CameraStatus = .camera
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -153,7 +154,6 @@ class CameraViewController: UIViewController {
         if let device = AVCaptureDevice.default(for: .video) {
             do {
                 let input = try AVCaptureDeviceInput(device: device)
-//                setupPreviewLayer()
                 
                 if session.canAddInput(input) {
                     session.addInput(input)
@@ -183,6 +183,14 @@ class CameraViewController: UIViewController {
      */
     private func drawButtons() {
         print("버튼 그리는 중")
+//        switch self.cameraStatus {
+//        case .camera:
+//            retryButton.isEnabled = false
+//            useThisPhotoButton.isEnabled = false
+//        case .captured:
+//            retryButton.isEnabled = true
+//            useThisPhotoButton.isEnabled = true
+//        }
         let buttonWidth = view.frame.width / 3
         let featureViewHeight = featureView.frame.height
         let stadardSize = min(buttonWidth, featureViewHeight)
@@ -209,16 +217,27 @@ class CameraViewController: UIViewController {
         output.capturePhoto(
             with: AVCapturePhotoSettings(),
             delegate: self)
+        cameraStatus = .captured
     }
     
     @objc private func didTapRetryButton() {
         print("retryButton 눌림")
+        cameraStatus = .camera
         reloadCamera()
         setupCamera()
     }
     
     @objc private func didTapUseThisPhotoButton() {
         print("useThisPhotoButton 눌림")
+        showResultSheet()
+    }
+    
+    private func showResultSheet() {
+        let vc = CaptureResultViewController()
+        let sheet = vc.sheetPresentationController
+        sheet?.detents = [.medium()]
+        sheet?.prefersGrabberVisible = true
+        present(vc, animated: true)
     }
 }
 

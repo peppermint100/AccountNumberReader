@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA02411D2AD17D2300B83FAF /* CaptureResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02411C2AD17D2300B83FAF /* CaptureResultViewController.swift */; };
 		BA05E96C2A94ADDD00D31A7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E96B2A94ADDD00D31A7A /* AppDelegate.swift */; };
 		BA05E96E2A94ADDD00D31A7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E96D2A94ADDD00D31A7A /* SceneDelegate.swift */; };
 		BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05E96F2A94ADDD00D31A7A /* MainTabBarViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA02411C2AD17D2300B83FAF /* CaptureResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResultViewController.swift; sourceTree = "<group>"; };
 		BA05E9682A94ADDD00D31A7A /* AccountNumberReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccountNumberReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA05E96B2A94ADDD00D31A7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA05E96D2A94ADDD00D31A7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */,
 				E52031022AA703E2007540AB /* HistoryDetailsViewController.swift */,
 				E5C1998E2AA9660500993507 /* HistoryDetailsEditViewController.swift */,
+				BA02411C2AD17D2300B83FAF /* CaptureResultViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				E5C910272A9DD2F5000AC5CA /* HistoryMO+CoreDataClass.swift in Sources */,
 				BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */,
 				E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */,
+				BA02411D2AD17D2300B83FAF /* CaptureResultViewController.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				E5C82E672AB0311400465142 /* HistoryDetails.swift in Sources */,
 				BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */,
