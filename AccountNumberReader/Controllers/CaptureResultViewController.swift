@@ -22,8 +22,10 @@ class CaptureResultViewController: UIViewController {
     
     private let accountLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "123-456-78910 국민"
+        label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingTail
         label.font = UIFont.systemFont(ofSize: 22, weight: .regular)
         label.textColor = .secondaryLabel
         return label
@@ -47,6 +49,7 @@ class CaptureResultViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(accountLabel)
         view.addSubview(copyButton)
+        accountLabel.text = account
         applyConstraints()
         copyButton.addTarget(self, action: #selector(didTapCopyButton), for: .touchUpInside)
         // Do any additional setup after loading the view.
@@ -64,7 +67,7 @@ class CaptureResultViewController: UIViewController {
             accountLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             accountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             accountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            accountLabel.heightAnchor.constraint(equalToConstant: 50),
+            accountLabel.bottomAnchor.constraint(equalTo: copyButton.topAnchor, constant: -30)
         ]
         
         let copyButtonConstraints = [
@@ -81,6 +84,7 @@ class CaptureResultViewController: UIViewController {
     
     @objc private func didTapCopyButton() {
         print("복사버튼 탭")
+        UIPasteboard.general.string = account
         dismiss(animated: true)
     }
 }

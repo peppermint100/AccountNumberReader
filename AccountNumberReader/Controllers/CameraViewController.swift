@@ -7,6 +7,8 @@
 
 import UIKit
 import AVFoundation
+import Vision
+import VisionKit
 
 class CameraViewController: UIViewController {
     
@@ -235,22 +237,36 @@ class CameraViewController: UIViewController {
     private func showResultSheet() {
         let vc = CaptureResultViewController()
         let sheet = vc.sheetPresentationController
-        sheet?.detents = [.medium()]
-        sheet?.prefersGrabberVisible = true
-        present(vc, animated: true)
+        
+//        guard let image = cameraView.image else {
+//            return
+//        }
+        let image = UIImage(named: "image")!
+        
+        let recognizer = TextRecognizer(image: image)
+        
+        recognizer.read { [weak self] text in
+            vc.account = text
+            sheet?.detents = [.medium(), .large()]
+            sheet?.prefersGrabberVisible = true
+            self?.present(vc, animated: true)
+        }
     }
 }
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        print("사진 output 처리 완료")
         guard let data = photo.fileDataRepresentation() else {
             return
         }
         
         session?.stopRunning()
         
-        let image = UIImage(data: data)
-        
+        guard let image = UIImage(data: data) else {
+            return
+        }
+
         cameraView.image = image
     }
 }

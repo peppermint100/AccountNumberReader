@@ -21,6 +21,8 @@
 		BA2810BF2AC4667C00CEA4F3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810BE2AC4667C00CEA4F3 /* Constants.swift */; };
 		BA2810C12AC466A400CEA4F3 /* AccountExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810C02AC466A400CEA4F3 /* AccountExtractor.swift */; };
 		BA2810C32AC46BFB00CEA4F3 /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */; };
+		BA30A3DA2AD288F2008CF947 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30A3D92AD288F2008CF947 /* TextRecognizer.swift */; };
+		BA30A3DC2AD2A768008CF947 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA30A3DB2AD2A768008CF947 /* image.jpeg */; };
 		BA57AB9C2A9E0DB40000961A /* HistorySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */; };
 		BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */; };
 		BA603DAD2A9A2B6F00A63E8E /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */; };
@@ -67,6 +69,8 @@
 		BA2810BE2AC4667C00CEA4F3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA2810C02AC466A400CEA4F3 /* AccountExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountExtractor.swift; sourceTree = "<group>"; };
 		BA2810C22AC46BFB00CEA4F3 /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
+		BA30A3D92AD288F2008CF947 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
+		BA30A3DB2AD2A768008CF947 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		BA57AB9B2A9E0DB40000961A /* HistorySearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchResultsViewController.swift; sourceTree = "<group>"; };
 		BA57AB9D2A9E13C60000961A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		BA603DAC2A9A2B6F00A63E8E /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 		BA05E9812A94AEAA00D31A7A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA30A3DB2AD2A768008CF947 /* image.jpeg */,
 				BA05E9742A94ADDF00D31A7A /* Assets.xcassets */,
 				BA05E96B2A94ADDD00D31A7A /* AppDelegate.swift */,
 				BA05E96D2A94ADDD00D31A7A /* SceneDelegate.swift */,
@@ -216,6 +221,7 @@
 				BAF2BFE72AB9AA59000605EB /* Observable.swift */,
 				BA2810BE2AC4667C00CEA4F3 /* Constants.swift */,
 				BA2810C02AC466A400CEA4F3 /* AccountExtractor.swift */,
+				BA30A3D92AD288F2008CF947 /* TextRecognizer.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA30A3DC2AD2A768008CF947 /* image.jpeg in Resources */,
 				BA05E9782A94ADDF00D31A7A /* LaunchScreen.storyboard in Resources */,
 				BA05E9752A94ADDF00D31A7A /* Assets.xcassets in Resources */,
 			);
@@ -302,6 +309,7 @@
 				BA57AB9E2A9E13C60000961A /* HistoryTableViewCell.swift in Sources */,
 				E5950BA92A9C38E20022F289 /* UserDefaultsManager.swift in Sources */,
 				BA02411D2AD17D2300B83FAF /* CaptureResultViewController.swift in Sources */,
+				BA30A3DA2AD288F2008CF947 /* TextRecognizer.swift in Sources */,
 				BA05E9702A94ADDD00D31A7A /* MainTabBarViewController.swift in Sources */,
 				E5C82E672AB0311400465142 /* HistoryDetails.swift in Sources */,
 				BA8187C12AB5A499005C4605 /* HistoryDetailsType.swift in Sources */,

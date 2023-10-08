@@ -14,7 +14,9 @@ class AccountExtractor {
 
     func getAccountNumber(from text: String) {
         // 설정 값 가져오기
-        // 모든 empty space 지우기
+        let copyScope = SettingsManager.shared.getCopyScope()
+        let includeHyphen = SettingsManager.shared.getIncludeHyphen()
+        
         // 은행 정보 가져오기
             // 있는 경우
                 // 해당 은행 Regex로 계좌번호 추출
