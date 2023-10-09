@@ -19,15 +19,6 @@ class SettingsManager {
         }
     }
     
-    func getIncludeHyphen() -> IncludeHyphen {
-        if let stringValue = UserDefaults.standard.string(forKey: SettingElement.includeHyphen(nil).keyName),
-           let setting = IncludeHyphen(rawValue: stringValue) {
-            return setting
-        } else {
-            return IncludeHyphen.on
-        }
-    }
-    
     func getLeaveHistory() -> LeaveHistory {
         if let stringValue = UserDefaults.standard.string(forKey: SettingElement.leaveHistory(nil).keyName),
            let setting = LeaveHistory(rawValue: stringValue) {

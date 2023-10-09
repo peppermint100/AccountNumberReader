@@ -60,19 +60,6 @@ class SettingsTableViewCell: UITableViewCell {
                 optionTitleLabel.text = "계좌번호"
             case .includeBankName:
                 optionTitleLabel.text = "계좌번호, 은행명"
-            case .includeName:
-                optionTitleLabel.text = "계좌번호, 은행명, 이름"
-            default:
-                optionTitleLabel.text = "-"
-            }
-        case .includeHyphen(let selected):
-            checkButton.isHidden = option != selected?.rawValue
-            let settingValue = IncludeHyphen(rawValue: option)
-            switch settingValue {
-            case .on:
-                optionTitleLabel.text = "포함"
-            case .off:
-                optionTitleLabel.text = "미포함"
             default:
                 optionTitleLabel.text = "-"
             }

@@ -46,8 +46,6 @@ class SettingsHeaderView: UITableViewHeaderFooterView {
         switch viewModel.settingElement {
         case .copyScope:
             titleLabel.text = "계좌번호 복사 범위"
-        case .includeHyphen:
-            titleLabel.text = "하이픈"
         case .leaveHistory:
             titleLabel.text = "스캔 내역 저장하기"
         }

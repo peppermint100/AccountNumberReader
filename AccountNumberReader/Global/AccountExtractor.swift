@@ -13,15 +13,16 @@ class AccountExtractor {
     private init() {}
 
     func extractAccount(from text: String) -> String {
-        // 설정 값 가져오기
         let copyScope = SettingsManager.shared.getCopyScope()
-        let includeHyphen = SettingsManager.shared.getIncludeHyphen()
-        
-        // 은행 정보 가져오기
         let bank = self.getBank(from: text)
         let accountNumber = self.getAccountNumber(from: text, bank: bank)
         
-        return "\(bank.id) \(accountNumber ?? "")"
+        switch copyScope {
+        case .onlyAccountNumber:
+            return accountNumber ?? ""
+        case .includeBankName:
+            return "\(bank.id) \(accountNumber ?? "")"
+        }
     }
     
     private func getBank(from text: String) -> Bank {

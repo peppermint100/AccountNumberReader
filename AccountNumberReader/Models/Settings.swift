@@ -2,7 +2,6 @@ import Foundation
 
 enum SettingElement {
     case copyScope(CopyScope?)
-    case includeHyphen(IncludeHyphen?)
     case leaveHistory(LeaveHistory?)
     
     var keyName: String {
@@ -10,8 +9,6 @@ enum SettingElement {
             switch self {
             case .copyScope:
                 return "copyScope"
-            case .includeHyphen:
-                return "includeHyphen"
             case .leaveHistory:
                 return "leaveHistory"
             }
@@ -23,8 +20,6 @@ enum SettingElement {
             switch self {
             case .copyScope:
                 return [CopyScope.onlyAccountNumber.rawValue, CopyScope.includeBankName.rawValue]
-            case .includeHyphen:
-                return [IncludeHyphen.on.rawValue, IncludeHyphen.off.rawValue]
             case .leaveHistory:
                 return [LeaveHistory.every.rawValue, LeaveHistory.ask.rawValue, LeaveHistory.never.rawValue]
             }
@@ -35,11 +30,6 @@ enum SettingElement {
 enum CopyScope: String {
     case onlyAccountNumber
     case includeBankName
-}
-
-enum IncludeHyphen: String {
-    case on
-    case off
 }
 
 enum LeaveHistory: String {

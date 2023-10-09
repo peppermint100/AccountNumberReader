@@ -11,7 +11,6 @@ class SettingsViewController: UIViewController {
     var sections: [SettingSection] = []
     
     var copyScopeOption: SettingElement = .copyScope(.includeBankName)
-    var includeHyphenOption: SettingElement = .includeHyphen(.on)
     var leaveHistoryOption: SettingElement = .leaveHistory(.every)
     
     private let tableView: UITableView = {
@@ -42,11 +41,9 @@ class SettingsViewController: UIViewController {
     
     private func loadSettings() {
         if let copyScopeValueString = UserDefaultsManager.shared.load(SettingElement.copyScope(nil).keyName),
-           let includeHyphenValueString = UserDefaultsManager.shared.load(SettingElement.includeHyphen(nil).keyName),
            let leaveHistoryValueString = UserDefaultsManager.shared.load(SettingElement.leaveHistory(nil).keyName)
         {
             copyScopeOption = .copyScope(CopyScope(rawValue: copyScopeValueString))
-            includeHyphenOption = .includeHyphen(IncludeHyphen(rawValue: includeHyphenValueString))
             leaveHistoryOption = .leaveHistory(LeaveHistory(rawValue: leaveHistoryValueString))
         }
         
@@ -55,15 +52,11 @@ class SettingsViewController: UIViewController {
         let copyScopeSetting = SettingSection(
             settingElement: copyScopeOption,
             settingValues: copyScopeOption.options)
-        let includeHyphenSetting = SettingSection(
-            settingElement: includeHyphenOption,
-            settingValues: includeHyphenOption.options)
         let leaveHistorySetting = SettingSection(
             settingElement: leaveHistoryOption,
             settingValues: leaveHistoryOption.options)
                
         sections.append(copyScopeSetting)
-        sections.append(includeHyphenSetting)
         sections.append(leaveHistorySetting)
     }
     
