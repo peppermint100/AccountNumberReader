@@ -257,17 +257,19 @@ class CameraViewController: UIViewController {
         }
     }
     
-    private func sendImageToHistory(image: UIImage) {
-        let leaveHistory = SettingsManager.shared.getLeaveHistory()
-        
-        switch leaveHistory {
-        case .every:
-            return
-        case .ask:
-            return
-        case .never:
-            return
+    private func askToSaveHistory(completion: @escaping ((Bool) -> Void)) {
+        print("사용자에게 저장 여부 물어보는 중")
+        let alert = UIAlertController(title: "내역 저장", message: "스캔한 내용을 저장하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "저장", style: .default) { _ in
+            completion(true)
         }
+        let cancel = UIAlertAction(title: "버리기", style: .destructive) { _ in
+            completion(false)
+        }
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -290,7 +292,25 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
 
 extension CameraViewController: CatureResultViewControllerDelegate {
     func didTapCopyButton(history: History?) {
-        history?.save {
+        let leaveHistory = SettingsManager.shared.getLeaveHistory()
+        switch leaveHistory {
+        case .every:
+            history?.save { [weak self] in
+                self?.reloadCamera()
+            }
+        case .ask:
+            askToSaveHistory { [weak self] save in
+                if save {
+                    history?.save { [weak self] in
+                        self?.reloadCamera()
+                    }
+                } else {
+                    self?.reloadCamera()
+                    return
+                }
+            }
+        case .never:
+            return
         }
     }
 }

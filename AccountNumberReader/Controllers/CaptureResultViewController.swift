@@ -89,7 +89,7 @@ class CaptureResultViewController: UIViewController {
     @objc private func didTapCopyButton() {
         print("복사버튼 탭")
         UIPasteboard.general.string = history?.content
-        delegate?.didTapCopyButton(history: history)
         dismiss(animated: true)
+        delegate?.didTapCopyButton(history: history)
     }
 }
