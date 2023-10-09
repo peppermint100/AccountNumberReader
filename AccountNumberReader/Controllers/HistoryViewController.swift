@@ -115,9 +115,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let history = histories[indexPath.row]
-        let vc = HistoryDetailsViewController()
+        print("테이블 셀 터치 \(history)")
+        let vc = HistoryDetailsViewController(history: history)
         vc.navigationItem.title = history.title
-        vc.history = history
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

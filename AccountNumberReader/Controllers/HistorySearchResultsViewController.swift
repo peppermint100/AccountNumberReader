@@ -90,12 +90,11 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let history = histories[indexPath.row]
-        let vc = HistoryDetailsViewController()
-        vc.navigationItem.title = history.title
-        vc.history = history
+        print("테이블 셀 터치 \(history)")
+        let vc = UINavigationController(rootViewController: HistoryDetailsViewController(history: history))
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
         vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

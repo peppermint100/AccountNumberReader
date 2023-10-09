@@ -3,7 +3,16 @@ import UIKit
 
 class HistoryDetailsViewController: UIViewController {
     
-    var history: History?
+    private var history: History
+    
+    init(history: History) {
+        self.history = history
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError()
+    }
     
     private let imageView: UIImageView = {
         let iv = UIImageView()
@@ -83,9 +92,7 @@ class HistoryDetailsViewController: UIViewController {
     }
     
     private func configureUI() {
-        if let history {
-            imageView.image = history.image
-        }
+        imageView.image = history.image
     }
     
     private func configureDelegate() {
@@ -103,21 +110,19 @@ class HistoryDetailsViewController: UIViewController {
     }
     
     @objc private func deleteHistory() {
-        if let history {
-            let alert = UIAlertController(title: nil, message: "\(history.title)을 삭제하시겠습니까?", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "삭제", style: .destructive) { okAction in
-                HistoryManager.shared.deleteHistory(id: history.id) { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.goBack()
-                    }
+        let alert = UIAlertController(title: nil, message: "\(self.history.title)을 삭제하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "삭제", style: .destructive) { okAction in
+            HistoryManager.shared.deleteHistory(id: self.history.id) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.goBack()
                 }
             }
-            let cancel = UIAlertAction(title: "취소", style: .cancel) { cancelAction in
-            }
-            alert.addAction(ok)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
         }
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { cancelAction in
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func configureSwipeGesture() {
@@ -127,12 +132,10 @@ class HistoryDetailsViewController: UIViewController {
     }
     
     @objc private func copyContentToClipboard() {
-        if let history {
-            let pasteboard = UIPasteboard.general
-            pasteboard.string = history.content
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-        }
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = history.content
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
     private func updateForms(history: History?) {
@@ -153,21 +156,19 @@ class HistoryDetailsViewController: UIViewController {
 
 extension HistoryDetailsViewController: HistoryDetailsFormViewDelegate, HistoryDetailsEditViewControllerDelegate {
     func didTapEditButton(historyDetailsType: HistoryDetailsType, value: String) {
-        if var history {
-            switch historyDetailsType {
-            case .title:
-                history.title = value
-                HistoryManager.shared.updateTitle(id: history.id, title: value)
-            case .content:
-                history.content = value
-                HistoryManager.shared.updateContent(id: history.id, content: value)
-            case .createdAt:
-                return
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.updateForms(history: history)
-            }
+        switch historyDetailsType {
+        case .title:
+            history.title = value
+            HistoryManager.shared.updateTitle(id: history.id, title: value)
+        case .content:
+            history.content = value
+            HistoryManager.shared.updateContent(id: history.id, content: value)
+        case .createdAt:
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.updateForms(history: self?.history)
         }
     }
     
