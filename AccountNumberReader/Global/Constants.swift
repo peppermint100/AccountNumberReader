@@ -8,6 +8,13 @@
 import Foundation
 
 struct Constants {
+    
+    static let invalidBank = Bank(id: "", names: [], accountNumberRegex: [
+        "\\d{12}",
+        "\\d{13}",
+        "\\d{14}",
+    ])
+    
     static let bankList: [Bank] = [
         Bank(
             id: "국민",
@@ -16,10 +23,10 @@ struct Constants {
                 "KB국민"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{2}-\\d{4}-\\d{3})\\b",
-                "\\b(\\d{6}-\\d{2}-\\d{6})\\b",
-                "\\b(\\d{12})\\b",
-                "\\b(\\d{14})\\b",
+                "\\d{3}-\\d{2}-\\d{4}-\\d{3}",
+                "\\d{6}-\\d{2}-\\d{6}",
+                "\\d{12}",
+                "\\d{14}",
             ]),
         Bank(
             id: "기업",
@@ -28,8 +35,8 @@ struct Constants {
                 "IBK기업"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{6}-\\d{2}-\\d{3})\\b",
-                "\\b(\\d{14})\\b",
+                "\\d{3}-\\d{6}-\\d{2}-\\d{3}",
+                "\\d{14}",
             ]),
         Bank(
             id: "농협",
@@ -38,25 +45,25 @@ struct Constants {
                 "NH"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{4}-\\d{4}-\\d{2})\\b",
-                "\\b(\\d{13})\\b",
+                "\\d{3}-\\d{4}-\\d{4}-\\d{2}",
+                "\\d{13}",
             ]),
         Bank(
             id: "신한",
             names: [
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{2}-\\d{6})\\b",
-                "\\b(\\d{3}-\\d{3}-\\d{6})\\b",
-                "\\b(\\d{11})\\b",
-                "\\b(\\d{12})\\b"
+                "\\d{3}-\\d{2}-\\d{6}",
+                "\\d{3}-\\d{3}-\\d{6}",
+                "\\d{11}",
+                "\\d{12}"
             ]),
         Bank(
             id: "우리",
             names: [],
             accountNumberRegex: [
-                "\\b(\\d{4}-\\d{3}-\\d{6})\\b",
-                "\\b(\\d{13})\\b",
+                "\\d{4}-\\d{3}-\\d{6}",
+                "\\d{13}",
             ]),
         Bank(
             id: "하나",
@@ -65,14 +72,14 @@ struct Constants {
                 "KEB하나"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{6}-\\d{5})\\b",
-                "\\b(\\d{14})\\b",
+                "\\d{3}-\\d{6}-\\d{5}",
+                "\\d{14}",
             ]),
         Bank(
             id: "외환",
             names: [
-                "\\b(\\d{3}-\\d{6}-\\d{3})\\b",
-                "\\b(\\d{12})\\b",
+                "\\d{3}-\\d{6}-\\d{3}",
+                "\\d{12}",
 
             ],
             accountNumberRegex: []),
@@ -82,9 +89,8 @@ struct Constants {
                 "씨티"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{6}-\\d{3})\\b",
-                "\\b(\\d{12})\\b",
-
+                "\\d{3}-\\d{6}-\\d{3}",
+                "\\d{12}",
             ]),
         Bank(
             id: "대구",
@@ -93,8 +99,8 @@ struct Constants {
                 "DBB대구"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{2}-\\d{6}-\\d{1})\\b",
-                "\\b(\\d{12})\\b",
+                "\\d{3}-\\d{2}-\\d{6}-\\d{1}",
+                "\\d{12}",
             ]),
         Bank(
             id: "부산",
@@ -103,8 +109,8 @@ struct Constants {
                 "BNK부산"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{4}-\\d{4}-\\d{2})\\b",
-                "\\b(\\d{13})\\b",
+                "\\d{3}-\\d{4}-\\d{4}-\\d{2}",
+                "\\d{13}",
             ]),
         Bank(
             id: "제일",
@@ -114,8 +120,8 @@ struct Constants {
                 "STANDARDCHARTERD"
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{2}-\\d{6})\\b",
-                "\\b(\\d{11})\\b",
+                "\\d{3}-\\d{2}-\\d{6}",
+                "\\d{11}",
             ]),
         Bank(
             id: "카카오",
@@ -125,8 +131,8 @@ struct Constants {
                 "KAKAO"
             ],
             accountNumberRegex: [
-                "\\b(\\d{4}-\\d{2}-\\d{6})\\b",
-                "\\b(\\d{13})\\b",
+                "\\d{4}-\\d{2}-\\d{6}",
+                "\\d{13}",
             ]),
         Bank(
             id: "케이",
@@ -134,8 +140,8 @@ struct Constants {
                 "케이뱅크",
             ],
             accountNumberRegex: [
-                "\\b(\\d{3}-\\d{3}-\\d{6})\\b",
-                "\\b(\\d{13})\\b",
+                "\\d{3}-\\d{3}-\\d{6}",
+                "\\d{13}",
             ]),
     ]
 }

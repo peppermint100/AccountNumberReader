@@ -185,14 +185,14 @@ class CameraViewController: UIViewController {
      */
     private func drawButtons() {
         print("버튼 그리는 중")
-//        switch self.cameraStatus {
-//        case .camera:
-//            retryButton.isEnabled = false
-//            useThisPhotoButton.isEnabled = false
-//        case .captured:
-//            retryButton.isEnabled = true
-//            useThisPhotoButton.isEnabled = true
-//        }
+        switch self.cameraStatus {
+        case .camera:
+            retryButton.isEnabled = false
+            useThisPhotoButton.isEnabled = false
+        case .captured:
+            retryButton.isEnabled = true
+            useThisPhotoButton.isEnabled = true
+        }
         let buttonWidth = view.frame.width / 3
         let featureViewHeight = featureView.frame.height
         let stadardSize = min(buttonWidth, featureViewHeight)
@@ -238,15 +238,15 @@ class CameraViewController: UIViewController {
         let vc = CaptureResultViewController()
         let sheet = vc.sheetPresentationController
         
-//        guard let image = cameraView.image else {
-//            return
-//        }
-        let image = UIImage(named: "image")!
+        guard let image = cameraView.image else {
+            return
+        }
         
         let recognizer = TextRecognizer(image: image)
         
         recognizer.read { [weak self] text in
-            vc.account = text
+            let extracted = AccountExtractor.shared.extractAccount(from: text)
+            vc.account = extracted
             sheet?.detents = [.medium(), .large()]
             sheet?.prefersGrabberVisible = true
             self?.present(vc, animated: true)

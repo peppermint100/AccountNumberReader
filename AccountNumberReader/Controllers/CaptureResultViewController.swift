@@ -22,7 +22,6 @@ class CaptureResultViewController: UIViewController {
     
     private let accountLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail

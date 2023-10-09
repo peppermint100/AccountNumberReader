@@ -22,7 +22,7 @@ enum SettingElement {
         get {
             switch self {
             case .copyScope:
-                return [CopyScope.onlyAccountNumber.rawValue, CopyScope.includeBankName.rawValue, CopyScope.includeName.rawValue]
+                return [CopyScope.onlyAccountNumber.rawValue, CopyScope.includeBankName.rawValue]
             case .includeHyphen:
                 return [IncludeHyphen.on.rawValue, IncludeHyphen.off.rawValue]
             case .leaveHistory:
@@ -35,7 +35,6 @@ enum SettingElement {
 enum CopyScope: String {
     case onlyAccountNumber
     case includeBankName
-    case includeName
 }
 
 enum IncludeHyphen: String {
