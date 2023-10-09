@@ -14,12 +14,6 @@ struct History {
     var image: UIImage
     var createdAt: Date
     var isPinned: Bool
-//    @NSManaged public var id: UUID?
-//    @NSManaged public var title: String?
-//    @NSManaged public var content: String?
-//    @NSManaged public var image: Data?
-//    @NSManaged public var createdAt: Date?
-//    @NSManaged public var isPinned: Bool
     
     init (id: UUID, title: String, content: String, image: UIImage, createdAt: Date, isPinned: Bool) {
         self.id = id
@@ -37,5 +31,10 @@ struct History {
         self.image = UIImage(data: historyMO.image!)!
         self.createdAt = historyMO.createdAt!
         self.isPinned = historyMO.isPinned
+    }
+    
+    func save(completion: @escaping () -> Void) {
+        print("히스토리 저장 중...\(self)")
+        HistoryManager.shared.addHistory(self, completion: completion)
     }
 }

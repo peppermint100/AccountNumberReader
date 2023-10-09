@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol CatureResultViewControllerDelegate {
+    func didTapCopyButton(history: History?)
+}
+
 class CaptureResultViewController: UIViewController {
     
-    var account: String?
+    var history: History?
+    var delegate: CatureResultViewControllerDelegate?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -48,7 +53,7 @@ class CaptureResultViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(accountLabel)
         view.addSubview(copyButton)
-        accountLabel.text = account
+        accountLabel.text = history?.content
         applyConstraints()
         copyButton.addTarget(self, action: #selector(didTapCopyButton), for: .touchUpInside)
         // Do any additional setup after loading the view.
@@ -83,7 +88,8 @@ class CaptureResultViewController: UIViewController {
     
     @objc private func didTapCopyButton() {
         print("복사버튼 탭")
-        UIPasteboard.general.string = account
+        UIPasteboard.general.string = history?.content
+        delegate?.didTapCopyButton(history: history)
         dismiss(animated: true)
     }
 }

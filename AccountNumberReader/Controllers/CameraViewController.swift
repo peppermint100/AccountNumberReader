@@ -148,6 +148,7 @@ class CameraViewController: UIViewController {
         output = AVCapturePhotoOutput()
         previewLayer = AVCaptureVideoPreviewLayer()
         cameraView.image = nil
+        setupCamera()
     }
     
     private func setupCamera() {
@@ -226,7 +227,6 @@ class CameraViewController: UIViewController {
         print("retryButton 눌림")
         cameraStatus = .camera
         reloadCamera()
-        setupCamera()
     }
     
     @objc private func didTapUseThisPhotoButton() {
@@ -246,10 +246,27 @@ class CameraViewController: UIViewController {
         
         recognizer.read { [weak self] text in
             let extracted = AccountExtractor.shared.extractAccount(from: text)
-            vc.account = extracted
+            let history = History(
+                id: UUID(), title: "새로운 계좌번호", content: extracted,
+                image: image, createdAt: Date(), isPinned: false)
+            vc.history = history
+            vc.delegate = self
             sheet?.detents = [.medium(), .large()]
             sheet?.prefersGrabberVisible = true
             self?.present(vc, animated: true)
+        }
+    }
+    
+    private func sendImageToHistory(image: UIImage) {
+        let leaveHistory = SettingsManager.shared.getLeaveHistory()
+        
+        switch leaveHistory {
+        case .every:
+            return
+        case .ask:
+            return
+        case .never:
+            return
         }
     }
 }
@@ -268,5 +285,12 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         }
 
         cameraView.image = image
+    }
+}
+
+extension CameraViewController: CatureResultViewControllerDelegate {
+    func didTapCopyButton(history: History?) {
+        history?.save {
+        }
     }
 }
