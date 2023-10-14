@@ -52,6 +52,26 @@ class HistorySearchResultsViewController: UIViewController {
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc private func handleLongPressOnCell(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            if let cell = sender.view as? UITableViewCell {
+                let menuController = UIMenuController.shared
+                let menuItem = UIMenuItem(title: "복사", action: #selector(copyContent(_:)))
+                menuController.menuItems = [menuItem]
+                menuController.showMenu(from: cell, rect: cell.bounds)
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
+            }
+        }
+    }
+    
+    @objc private func copyContent(_ sender: UIMenuItem) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let history = histories[indexPath.row]
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = history.content
+    }
 }
 
 // MARK: TableViewExtensions
@@ -72,6 +92,9 @@ extension HistorySearchResultsViewController: UITableViewDelegate, UITableViewDa
                 as? HistoryTableViewCell else {
             return UITableViewCell()
         }
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressOnCell))
+        cell.addGestureRecognizer(gesture)
         
         let viewModel = historyViewModels[indexPath.row]
         cell.indexPath = indexPath

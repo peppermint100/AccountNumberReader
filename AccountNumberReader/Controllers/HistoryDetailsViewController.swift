@@ -108,7 +108,7 @@ class HistoryDetailsViewController: UIViewController {
         let copyButton = UIBarButtonItem(image: copyButtonImage, style: .plain, target: self, action: #selector(copyContentToClipboard))
         navigationItem.rightBarButtonItems = [deleteButton, copyButton]
     }
-    
+
     @objc private func deleteHistory() {
         let alert = UIAlertController(title: nil, message: "\(self.history.title)을 삭제하시겠습니까?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "삭제", style: .destructive) { okAction in
