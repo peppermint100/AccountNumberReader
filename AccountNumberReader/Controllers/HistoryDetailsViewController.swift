@@ -103,7 +103,7 @@ class HistoryDetailsViewController: UIViewController {
     
     private func configureRightBarButtons() {
         let deleteButtonImage = UIImage(systemName: "trash")
-        let copyButtonImage = UIImage(systemName: "a.magnify")
+        let copyButtonImage = UIImage(systemName: "doc.on.doc")
         let deleteButton = UIBarButtonItem(image: deleteButtonImage, style: .plain, target: self, action: #selector(deleteHistory))
         let copyButton = UIBarButtonItem(image: copyButtonImage, style: .plain, target: self, action: #selector(copyContentToClipboard))
         navigationItem.rightBarButtonItems = [deleteButton, copyButton]
