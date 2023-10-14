@@ -25,6 +25,7 @@ struct Constants {
             accountNumberRegex: [
                 "\\d{3}-\\d{2}-\\d{4}-\\d{3}",
                 "\\d{6}-\\d{2}-\\d{6}",
+                "\\d{11}",
                 "\\d{12}",
                 "\\d{14}",
             ]),
