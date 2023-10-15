@@ -71,22 +71,15 @@ class HistoryViewController: UIViewController {
 
     @objc private func handleLongPressOnCell(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            if let cell = sender.view as? UITableViewCell {
-                let menuController = UIMenuController.shared
-                let menuItem = UIMenuItem(title: "복사", action: #selector(copyContent(_:)))
-                menuController.menuItems = [menuItem]
-                menuController.showMenu(from: cell, rect: cell.bounds)
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.success)
+            let point = sender.location(in: tableView)
+            guard let indexPath = tableView.indexPathForRow(at: point) else {
+                return
             }
+            let history = histories[indexPath.row]
+            history.content.copyToClipboard()
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
         }
-    }
-    
-    @objc private func copyContent(_ sender: UIMenuItem) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let history = histories[indexPath.row]
-        let pasteboard = UIPasteboard.general
-        pasteboard.string = history.content
     }
     
     private func getHistoriesWithQuery(_ query: String) -> [History] {
